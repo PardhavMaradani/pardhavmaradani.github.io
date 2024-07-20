@@ -1,2 +1,2 @@
-# pardhavmaradani.github.io
-Pardhav Maradani's GitHub Page
+- My [Blog](https://pardhav-m.blogspot.com)
+- My [GitHub](https://github.com/PardhavMaradani) profile
