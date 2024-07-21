@@ -1,2 +1,2 @@
 - My [Blog](https://pardhav-m.blogspot.com)
-- My [GitHub](https://github.com/PardhavMaradani) profile
+- My [GitHub profile](https://github.com/PardhavMaradani)
