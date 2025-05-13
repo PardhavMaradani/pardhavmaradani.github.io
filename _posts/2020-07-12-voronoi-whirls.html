@@ -1,0 +1,395 @@
+---
+layout: post
+title: Voronoi Whirls
+date: '2020-07-12T12:00:00.009+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T11:34:00.854+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_YtrygpplpFWJayJ8xS0HQ337077h7f5r5PsoUW5tPTkoAPX_cKNlfY6LkF2yMiPL-TeFlaCKg0itczob-gUue7_RIQeih1KpMewrUovn6M0L-3UB45mJuKdEwkzNZVGNTJuEQrhzpTw/s72-c-d/voronoi_whirls.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-8904702860285039030
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/07/voronoi-whirls.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_YtrygpplpFWJayJ8xS0HQ337077h7f5r5PsoUW5tPTkoAPX_cKNlfY6LkF2yMiPL-TeFlaCKg0itczob-gUue7_RIQeih1KpMewrUovn6M0L-3UB45mJuKdEwkzNZVGNTJuEQrhzpTw/s1200/voronoi_whirls.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_YtrygpplpFWJayJ8xS0HQ337077h7f5r5PsoUW5tPTkoAPX_cKNlfY6LkF2yMiPL-TeFlaCKg0itczob-gUue7_RIQeih1KpMewrUovn6M0L-3UB45mJuKdEwkzNZVGNTJuEQrhzpTw/s1200/voronoi_whirls.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Whirls" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi_YtrygpplpFWJayJ8xS0HQ337077h7f5r5PsoUW5tPTkoAPX_cKNlfY6LkF2yMiPL-TeFlaCKg0itczob-gUue7_RIQeih1KpMewrUovn6M0L-3UB45mJuKdEwkzNZVGNTJuEQrhzpTw/d/voronoi_whirls.jpg"
+                        title="Voronoi Whirls" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table-->
+<div>Towards the end of previous posts on <a href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}"
+        target="_blank">Sliders</a> and <a href="{{ site.baseurl }}{% post_url 2020-06-28-bezier-curve-animations %}"
+        target="_blank">Bézier Curve Animations</a>, we could draw Polygon <a
+        href="https://mathworld.wolfram.com/Whirl.html" target="_blank">Whirls</a> for any regular or irregular convex
+    polygon using a recursive method. &nbsp;I wanted to see if I could tile many convex polygons with whirls to fill an
+    area.</div><span><a name='more'></a></span>
+<div><br /></div>
+<div>Here is what I had in mind (all other convex polygons filled with whirls as well):</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcLJZraPx4F6RHDvwXDRO7MJJuSIA9ZRcHzM5eqlH5n1vqJfTBDP8-Jr1z6yltKy41G2gcSLBjV0JTz49RwKfgFaV3s7yQO6SDU_s9PzTd83emKCSPGxRMeE_RKcOkt4sR_BhzYZaTgAk/s1200/polygon_whirls_tiling.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Expected Polygon Whirls Tiling" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcLJZraPx4F6RHDvwXDRO7MJJuSIA9ZRcHzM5eqlH5n1vqJfTBDP8-Jr1z6yltKy41G2gcSLBjV0JTz49RwKfgFaV3s7yQO6SDU_s9PzTd83emKCSPGxRMeE_RKcOkt4sR_BhzYZaTgAk/d/polygon_whirls_tiling.jpg"
+                        title="Expected Polygon Whirls Tiling" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Expected Polygon Whirls Tiling<br /></td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="basic-voronoi" style="text-align: left;">Basic Voronoi</h2>
+<div>While searching how to fill a space with convex polygons, I came across and learnt about&nbsp;<a
+        href="https://en.wikipedia.org/wiki/Voronoi_diagram" target="_blank">Voronoi Diagrams</a>. &nbsp;If we get the
+    individual Voronoi convex polygons, we can then draw the whirls within them as we did in previous posts.</div>
+<div><br /></div>
+<div>The first piece of code I saw to do this in Python was <a
+        href="https://rosettacode.org/wiki/Voronoi_diagram#Python" target="_blank">this</a>. &nbsp;This code colors each
+    pixel by computing the distance to all the seeds and figuring out the closest seed. &nbsp;This didn't give me the
+    polygons I need and to do that, I have to figure out the edges, vertices etc from the pixel colors.</div>
+<div><br /></div>
+<div>After more searches, I came across these two Python implementations <a href="https://github.com/jansonh/Voronoi"
+        target="_blank">here</a> and <a href="https://github.com/tchaumeny/py-voronoi" target="_blank">here</a>.
+    &nbsp;Both of them needed some changes for them to work in Trinket (because Trinket does not have support for all
+    libraries). &nbsp;There were also bugs in both of them (incorrect edges at times in the former, division by zero
+    errors in the later, etc). &nbsp;I picked the <a href="https://github.com/jansonh/Voronoi"
+        target="_blank">former</a>, which mentioned it is an implementation of Fortune's Algorithm. &nbsp;I didn't quite
+    understand the full Algorithm yet, but wanted to use the code to see if it helps. &nbsp;Given Trinket doesn't
+    support all libraries (like heapq for example), I had to create a separate file with just the needed functions (see
+    min_heapq.py in the code below).</div>
+<div><br /></div>
+<div>This code gave me a set of edges as the output as shown below: (the black dots are the random seeds, the inner
+    rectangle is the bounding box and the red lines are the edges returned with the red dots being the vertices of the
+    edges)</div>
+<div>
+    <div><br /></div>
+</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgu93gYvOx3qfmNH5Vn7qry_uLtLI7C7REPhNZeujDFlacivTlyjJCMFgm4KZb76DJjOn_-eRFSgy56Vbzr-Fyc3xW2Vubhotqcu5xqMOZIZIig4_JVazP9_j8DjHtuicRK6A56HRxbGAc/s1200/voronoi_1_basic_edges.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Basic Edges" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgu93gYvOx3qfmNH5Vn7qry_uLtLI7C7REPhNZeujDFlacivTlyjJCMFgm4KZb76DJjOn_-eRFSgy56Vbzr-Fyc3xW2Vubhotqcu5xqMOZIZIig4_JVazP9_j8DjHtuicRK6A56HRxbGAc/d/voronoi_1_basic_edges.jpg"
+                        title="Voronoi Basic Edges" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Basic Edges<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>What I want is separate polygons corresponding to each seed. &nbsp;My next step was to clip the edges so that they
+    do not cross the bounding box. &nbsp;One way to do that is to calculate the intersection of each edge with the four
+    sides of the bounding box. &nbsp;I first did that and then to keep it simple, I learnt about line clipping and used
+    the code from <a href="https://github.com/scivision/lineclipping-python-fortran/blob/master/pylineclip/__init__.py"
+        target="_blank">here</a>, which was better. (see line_clip.py in code below)</div>
+<div><br /></div>
+<div>With this, I could get clipped edges as shown below (in blue):</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyQl_hZUqfkTo1rbMwS3j0ZdN9DJYZe6LUHSs6KW71N0I7xz0IZtcEkpbfV7iTBSBwo3SOcn_ZNig5fMQvkJvQXuwFoyR9lOLzYQ39Mtih7cwodK_XkCNsbFZA5qPd0oMapRIVKq2HhQg/s1200/voronoi_2_clipped_edges.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Clipped Edges" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyQl_hZUqfkTo1rbMwS3j0ZdN9DJYZe6LUHSs6KW71N0I7xz0IZtcEkpbfV7iTBSBwo3SOcn_ZNig5fMQvkJvQXuwFoyR9lOLzYQ39Mtih7cwodK_XkCNsbFZA5qPd0oMapRIVKq2HhQg/d/voronoi_2_clipped_edges.jpg"
+                        title="Voronoi Clipped Edges" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Clipped Edges<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>My next step was to connect the vertices on the border of the bounding box. &nbsp;To do that, I sorted the vertices
+    by x or y (depending on which side of the bounding box) and created edges between them in sequence. (see
+    'get_voronoi_polygons' function in voronoi_helpers.py in the code below)</div>
+<div><br /></div>
+<div>This is what I had after this step:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhj-wBf7oSlz5T7vX8NBgz4NmjPCH4Sh08W7_fl8-6E6vOuT9d5SrEEkxx_14RlzhpNAR0sz6zlqZ8aOIJ3PBGRgN0WxvLzc6J5doaXDowG98O6ZAlisV66vvZlUe3T6EyfRwZ6fxMrx3A/s1200/voronoi_3_filled_edges.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Filled Edges" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhj-wBf7oSlz5T7vX8NBgz4NmjPCH4Sh08W7_fl8-6E6vOuT9d5SrEEkxx_14RlzhpNAR0sz6zlqZ8aOIJ3PBGRgN0WxvLzc6J5doaXDowG98O6ZAlisV66vvZlUe3T6EyfRwZ6fxMrx3A/d/voronoi_3_filled_edges.jpg"
+                        title="Voronoi Filled Edges" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Filled Edges<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>At this point, I still had only the edges and no polygons. &nbsp;To create polygons corresponding to each seed, I
+    did the following:</div>
+<div>
+    <ul style="text-align: left;">
+        <li>Calculated the distance from the mid point of each edge to each of the seeds</li>
+        <li>For each edge, the closest two seeds are the cells that this edge belongs to</li>
+        <ul>
+            <li>For the edges on the border, there is only one cell</li>
+        </ul>
+    </ul>
+    <div>Next, to get the order of vertices in the polygon, I did the following:</div>
+    <ul style="text-align: left;">
+        <li>Calculated the approximate center (average of x and y of all vertices)</li>
+        <li>Calculated the angle to the center from each of the vertex and sorted them</li>
+        <li>Picked the vertices from the lowest to the highest angle to form the closed polygon</li>
+    </ul>
+</div>
+<div>(see 'get_voronoi_polygons' function in voronoi_helpers.py in the code below)</div>
+<div><br /></div>
+<div>With this, I could get polygons (set of vertices) for each of the seeds as drawn below:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKLb7-idHLbIwbmiTmQOPu4EJKWFmrHD-IoaqL9kLdymdhyvUKg1qsf2A8LIMmrJeTWmJ7I13ASH5bEfQzYZ48HUEH61ELjKuGVo8sJkoCG0xlxo9fWA5nRErdHMoRuJ-D0Ys1GDk3vno/s1200/voronoi_4_polygons.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Polygons" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKLb7-idHLbIwbmiTmQOPu4EJKWFmrHD-IoaqL9kLdymdhyvUKg1qsf2A8LIMmrJeTWmJ7I13ASH5bEfQzYZ48HUEH61ELjKuGVo8sJkoCG0xlxo9fWA5nRErdHMoRuJ-D0Ys1GDk3vno/d/voronoi_4_polygons.jpg"
+                        title="Voronoi Polygons" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Polygons<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>As you can see from the previous image, there are more than two vertices (blue dots) on some edges because of how
+    the Voronoi algorithm calculated the edges. &nbsp;This will be a problem when we try to draw whirls, so I wanted to
+    remove these unnecessary vertices in between.</div>
+<div><br /></div>
+<div>To do this, I used the method described <a
+        href="https://stackoverflow.com/questions/328107/how-can-you-determine-a-point-is-between-two-other-points-on-a-line-segment"
+        target="_blank">here</a> to determine if a point is between two points.</div>
+<div><br /></div>
+<div>
+    <div>(see 'get_voronoi_polygons' function in voronoi_helpers.py in the code below)</div>
+</div>
+<div><br /></div>
+<div>Finally, I now have simplified polygons corresponding to each seed as shown below:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipQ_9percTuLeayToHTV7K1-OesWOajnLYfwimQfkkfe-mzPy0wBOAE1qRb-DSYD-p8YTisE00sAUarcSlDrAk_yYv4FzlTTU_qsRSeLIxoXew8q6RMY8S7Mizeko-Nb9BJMIP5KDuxh8/s1200/voronoi_5_polygons_simplified.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Simplified Polygons" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipQ_9percTuLeayToHTV7K1-OesWOajnLYfwimQfkkfe-mzPy0wBOAE1qRb-DSYD-p8YTisE00sAUarcSlDrAk_yYv4FzlTTU_qsRSeLIxoXew8q6RMY8S7Mizeko-Nb9BJMIP5KDuxh8/d/voronoi_5_polygons_simplified.jpg"
+                        title="Voronoi Simplified Polygons" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Simplified Polygons<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Once we have clean polygons, we can do all kinds of stuff with them.</div>
+<div><br /></div>
+<div>Here is an example of a basic colored Voronoi Diagram:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_AwtuQCmKDVoGl6X8mZAtRsSMwV6aqcqRtaKuRkfY1-vGPAbcT4G_hYm7-ZkoSAzWYTzDTLh8RQvVkixNFJGtBVtkwsjU1NFAEzsZ8lTkh7g9T_oUW8jb8_IvERb1R6RM2T9W_4W03NA/s1200/voronoi_diagram.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Diagram" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_AwtuQCmKDVoGl6X8mZAtRsSMwV6aqcqRtaKuRkfY1-vGPAbcT4G_hYm7-ZkoSAzWYTzDTLh8RQvVkixNFJGtBVtkwsjU1NFAEzsZ8lTkh7g9T_oUW8jb8_IvERb1R6RM2T9W_4W03NA/d/voronoi_diagram.jpg"
+                        title="Voronoi Diagram" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Diagram<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is all the <a href="https://github.com/PardhavMaradani/blog/blob/main/voronoi-whirls/basic-voronoi.py"
+        target="_blank">code</a> for generating basic Voronoi polygons:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).</span>
+</div>
+<div><br /></div>
+
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/631224a2d8?toggleCode=true&amp;runOption=run"
+    width="100%"></iframe>&nbsp;&nbsp;<h2 id="whirls" style="text-align: left;">Whirls</h2>
+<div>Now that we have basic Voronoi polygons, we can now draw whirls that we set out to do. &nbsp;I used the same
+    recursive method from previous posts to draw these whirls.</div>
+<div><br /></div>
+<div>Here is an example of one such whirl with lines:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoPnc1QufOZvKuOqkrhmAEA0mOiHup_GaSQvvKZUMe60N-CSKEzHwR8TvMJjL-fAc-hS23h2yLUmmPYGqiR-v3mYmomgUpPzSnvCRrCTzTuCoSLzMbUxIGxs-8zy9Fx5i8xXAaR42bQFA/s1200/voronoi_whirls_lines.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Whirls with lines" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoPnc1QufOZvKuOqkrhmAEA0mOiHup_GaSQvvKZUMe60N-CSKEzHwR8TvMJjL-fAc-hS23h2yLUmmPYGqiR-v3mYmomgUpPzSnvCRrCTzTuCoSLzMbUxIGxs-8zy9Fx5i8xXAaR42bQFA/d/voronoi_whirls_lines.jpg"
+                        title="Voronoi Whirls with lines" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Whirls with lines<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here are a couple of other examples with different line spacing between them:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBo8JS7f7vEX_fd0MgEUefR5dNLfCdJ4hyphenhyphen_mvRlPpUM6YD_91LgGC9m_ym3jjbGzr7_YMIzLhfWJurHZAHoJFxwSgPfZR4nh-zBwFTjy_YO_kipFeQ9Yif5j5N0ASnCnZg4j3qSuo1hEw/s1200/voronoi_whirls_with_lines_other_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Whirls with lines other examples"
+                        border="0" data-original-height="400" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgBo8JS7f7vEX_fd0MgEUefR5dNLfCdJ4hyphenhyphen_mvRlPpUM6YD_91LgGC9m_ym3jjbGzr7_YMIzLhfWJurHZAHoJFxwSgPfZR4nh-zBwFTjy_YO_kipFeQ9Yif5j5N0ASnCnZg4j3qSuo1hEw/d/voronoi_whirls_with_lines_other_examples.jpg"
+                        title="Voronoi Whirls with lines other examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Whirls with lines other examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>We can also draw polygons inside themselves in a concentric way. &nbsp;To do that I needed to know the center (or
+    centroid) of each polygon and I found out how to do that <a href="https://bell0bytes.eu/centroid-convex/"
+        target="_blank">here</a>. &nbsp;(Note that all our polygons are Convex in a Voronoi diagram) &nbsp; There are
+    also multiple ways to draw concentric polygons depending on the spacing between them.</div>
+<div><br /></div>
+<div>Here are some examples of concentric polygons:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU-OCojY3thMX3L5OgKKxTr8fND1BNf2WS-nAoXXs47YzX-1Yo5hSJgy1bm1x7-crOpcymSg9ep6HlUApGLFZWQuX08WZ62vOu8pMTZjX0Yx65mZ0YecGQsR591qoQzoW-HFeaTfU_CLQ/s1200/voronoi_concentric_lines_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi concentric lines examples"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU-OCojY3thMX3L5OgKKxTr8fND1BNf2WS-nAoXXs47YzX-1Yo5hSJgy1bm1x7-crOpcymSg9ep6HlUApGLFZWQuX08WZ62vOu8pMTZjX0Yx65mZ0YecGQsR591qoQzoW-HFeaTfU_CLQ/d/voronoi_concentric_lines_examples.jpg"
+                        title="Voronoi concentric lines examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi concentric lines examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>We can also draw these lines closer to each other with gradient colors.</div>
+<div><br /></div>
+<div>Here are some examples that show gradients for both concentric and whirls:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgB3ZDPSfnpq2RJ6tDB4g5djZkzGRVvqHVSPp8qiZcO6i_pq563TovnRTOJ9NERJ_TMtS3nXzNW7QuA_dCYj8dwWOr4RZklbIU2wFuOT7mnu4DoGeAGAlcVrNsgEF0UXT6mbK4yxx4B9rs/s1200/voronoi_gradients_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi gradients examples" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgB3ZDPSfnpq2RJ6tDB4g5djZkzGRVvqHVSPp8qiZcO6i_pq563TovnRTOJ9NERJ_TMtS3nXzNW7QuA_dCYj8dwWOr4RZklbIU2wFuOT7mnu4DoGeAGAlcVrNsgEF0UXT6mbK4yxx4B9rs/d/voronoi_gradients_examples.jpg"
+                        title="Voronoi gradients examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi gradients examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>We can also use different gradients for each of the polygons to make them even more colorful.</div>
+<div><br /></div>
+<div>Here is an example for concentric polygons:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYAU8HLmYvKEjdUaJ3FFZkYMHx7Yr8ZZIBE4qI4Vo9GyuVt5QHt0eChGoYqINGVmeTtKSJXFhqCDLFBOiP7ZXogXl3WAp3ANb5agftu7hARXaq9cqDj1e3RaSokNHy4YR5nwLGUjDDEd8/s1200/voronoi_random_gradients_concentric.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi random gradients concentric"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYAU8HLmYvKEjdUaJ3FFZkYMHx7Yr8ZZIBE4qI4Vo9GyuVt5QHt0eChGoYqINGVmeTtKSJXFhqCDLFBOiP7ZXogXl3WAp3ANb5agftu7hARXaq9cqDj1e3RaSokNHy4YR5nwLGUjDDEd8/d/voronoi_random_gradients_concentric.jpg"
+                        title="Voronoi random gradients concentric" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi random gradients concentric<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is an example for polygon whirls:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjO7mBUATypa9tC2PtFXVx3_0q8_BmJPVnfNFgH6z9Hm91dpNOk64zlFC2L8LQ08xcvX9kzKVAFLqZOVKpr94qxF0P7R5fG2sZZykfeJoTeUG_u2DWrMtqus5n_VDPaSAGt9StPqKvY5n4/s1200/voronoi_random_gradients_whirls.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi random gradients whirls" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjO7mBUATypa9tC2PtFXVx3_0q8_BmJPVnfNFgH6z9Hm91dpNOk64zlFC2L8LQ08xcvX9kzKVAFLqZOVKpr94qxF0P7R5fG2sZZykfeJoTeUG_u2DWrMtqus5n_VDPaSAGt9StPqKvY5n4/d/voronoi_random_gradients_whirls.jpg"
+                        title="Voronoi random gradients whirls" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi random gradients whirls<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/voronoi-whirls/voronoi-whirls.py"
+        target="_blank">code</a> for all the outputs shown above:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).
+        &nbsp;You can tweak the variables below to generate all the variations shown above.</span></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/e57355b2b3?toggleCode=true&amp;runOption=run" width="100%"></iframe>&nbsp;<h2 id="summary"
+    style="text-align: left;">Summary</h2>
+
+<div>Tiling polygon whirls turned out to be more involved than what I anticipated in the beginning. There are a lot of details I learnt during this process of making this work in Trinket along with some new geometric algorithms.</div>
+<div><br /></div>
+<div>In the process, I also learnt about Voronoi diagrams and found them to be very interesting and beautiful. There are many other interesting variations / ideas using Voronoi that I would like to explore in the future.</div>
+<div><br /></div>
+<div>All the code in this post is available on <a href="https://github.com/PardhavMaradani/blog/blob/main/voronoi-whirls/" target="_blank">GitHub</a>.</div>
+<div><br /></div>
+<div>- Pardhav Maradani</div>

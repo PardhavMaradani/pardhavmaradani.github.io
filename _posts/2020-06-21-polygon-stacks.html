@@ -1,0 +1,365 @@
+---
+layout: post
+title: Polygon Stacks
+date: '2020-06-21T14:26:00.011+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T13:07:37.672+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi88c-DdmHM_b4bPanqm3k-PJwGeMBcCJMxi21TCQIsKNsIrIk00aCnnleFqOEoU2OKTk-HSHELFFzEvsDS4IwcJ88tc6HIo4J2IgOchOqA6Lt3a1v9hbn3M3dEqLjeCUXhkVQKhyphenhyphenzH_48/s72-c-d/polygon_stacks.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-7967657541973709682
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/06/polygon-stacks.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi88c-DdmHM_b4bPanqm3k-PJwGeMBcCJMxi21TCQIsKNsIrIk00aCnnleFqOEoU2OKTk-HSHELFFzEvsDS4IwcJ88tc6HIo4J2IgOchOqA6Lt3a1v9hbn3M3dEqLjeCUXhkVQKhyphenhyphenzH_48/s1200/polygon_stacks.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi88c-DdmHM_b4bPanqm3k-PJwGeMBcCJMxi21TCQIsKNsIrIk00aCnnleFqOEoU2OKTk-HSHELFFzEvsDS4IwcJ88tc6HIo4J2IgOchOqA6Lt3a1v9hbn3M3dEqLjeCUXhkVQKhyphenhyphenzH_48/s1200/polygon_stacks.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Polygon stacks" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi88c-DdmHM_b4bPanqm3k-PJwGeMBcCJMxi21TCQIsKNsIrIk00aCnnleFqOEoU2OKTk-HSHELFFzEvsDS4IwcJ88tc6HIo4J2IgOchOqA6Lt3a1v9hbn3M3dEqLjeCUXhkVQKhyphenhyphenzH_48/d/polygon_stacks.jpg"
+                        title="Polygon stacks" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table-->
+<div style="text-align: left;">While searching for interesting patterns with polygons, I came across <a
+        href="https://bl.ocks.org/mbostock/1d48ce4f3024edfc2277" target="_blank">Spiral Triangle</a> and <a
+        href="https://observablehq.com/@mbostock/spiral-stack" target="_blank">Spiral Stack</a> by Mike Bostock that
+    I really liked. &nbsp;I wanted to reproduce these in Python Turtle and see if I can add more variations.
+    &nbsp;In particular, I wanted to see how these look if we could use different polygons for the inner and outer
+    shapes.</div><span><a name='more'></a></span>
+<div style="text-align: left;"><br /></div>
+<h2 id="polygon-stacks" style="text-align: left;">Polygon Stacks</h2>
+<p style="text-align: left;">We already have code to draw a regular polygon anywhere on the screen with any number of
+    sides and any length and with any angle with respect to x axis from a previous <a
+        href="{{ site.baseurl }}{% post_url 2020-05-31-polygons-in-polygons %}" target="_blank">post</a> on this blog.
+</p>
+<p style="text-align: left;">To draw polygon stacks, we have to place one polygon on top of the other. &nbsp;This is
+    similar to how we fan out playing cards as shown below:</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4EUrC2DOzL2EqIqaGmsA6K7eG32w-bPSTobxx7Kke5iuoc7dRMTAG9KLv0nVwJm8gcMbLmX0HLwbSReI-b4iqWNqQO2V2c_8-zHVG7Lgl8ZToCRpC_pSnWh4YQWUjhrY3LoFLzZbcFyw/s800/stacked_cards.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Stacked cards" border="0"
+                        data-original-height="488" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4EUrC2DOzL2EqIqaGmsA6K7eG32w-bPSTobxx7Kke5iuoc7dRMTAG9KLv0nVwJm8gcMbLmX0HLwbSReI-b4iqWNqQO2V2c_8-zHVG7Lgl8ZToCRpC_pSnWh4YQWUjhrY3LoFLzZbcFyw/d/stacked_cards.jpg"
+                        title="Stacked cards" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Stacked cards<br /></td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left;">The problem comes when we spread the cards fully in a circular shape as shown below.
+    &nbsp;The gray coloured card will remain on top of everything else (left). &nbsp;We want it to be tucked below the
+    cards that follow it (right).</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVkenuzreqEeAexiHN5BfNeqvnOT682nzXzVT9Ko9MQTqVZPXUJDEoJUh6oIvE58rCJ-r1sWhPSYUG5SToZJrCt6hc4pTwNdPqiceKQNZL06zI8m9PzOkpY9qiCCFi3vKrmDqexZRyaXY/s800/expected_overlap.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Expected overlap" border="0"
+                        data-original-height="371" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVkenuzreqEeAexiHN5BfNeqvnOT682nzXzVT9Ko9MQTqVZPXUJDEoJUh6oIvE58rCJ-r1sWhPSYUG5SToZJrCt6hc4pTwNdPqiceKQNZL06zI8m9PzOkpY9qiCCFi3vKrmDqexZRyaXY/d/expected_overlap.jpg"
+                        title="Expected overlap" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Expected overlap<br /></td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left;">I learnt that achieving this is not very straight forward.</p>
+<h3 id="polygon-stacks-method" style="text-align: left;">Method</h3>
+<p style="text-align: left;">I looked at the code for Spiral Stack mentioned before to see how it was done there. I
+    learnt that he was drawing the overall shape twice with a different starting position each time and clipping half
+    the screen so that the exposed shape isn't shown. &nbsp;Here is an illustration of how this is done:</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjytaFgBLQeKWKjzHGLkbiXf9ulm-UlQm9KOi6LmTHoFYY9wMG5ssAqXKIi4kF-jgHpynevzgpcmi8p6Chi2ymJwbFTcKZjqwcCRHK6Gt4LSX4eV6uIsh7liCZrBECLsNtDDMMUThxUTto/s800/clipping_method.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Clipping method" border="0"
+                        data-original-height="259" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjytaFgBLQeKWKjzHGLkbiXf9ulm-UlQm9KOi6LmTHoFYY9wMG5ssAqXKIi4kF-jgHpynevzgpcmi8p6Chi2ymJwbFTcKZjqwcCRHK6Gt4LSX4eV6uIsh7liCZrBECLsNtDDMMUThxUTto/d/clipping_method.jpg"
+                        title="Clipping method" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Clipping method<br /></td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left;">
+    <font face="inherit">I wanted to do the same in Python Turtle. &nbsp;However, there is no such clipping method
+        available in Turtle. &nbsp;So, I searched and came across the following stack overflow <a
+            href="https://stackoverflow.com/questions/37555770/control-shape-overlap-in-pythons-turtle"
+            target="_blank">post</a> which outlined a similar problem. &nbsp;Though the solution seemed promising at
+        first, I noticed that there was a problem if we drew the polygons with a border unlike with just the fill color
+        as shown there. &nbsp;However, I learnt that there is something called as Sutherland-Hodgman polygon clipping
+        algorithm and found the Python <a href="https://rosettacode.org/wiki/Sutherland-Hodgman_polygon_clipping#Python"
+            target="_blank">code</a> for it in that post.</font>
+</p>
+<p style="text-align: left;">
+    <font face="inherit"><span style="background-color: white; caret-color: rgb(36, 39, 41);">So, I decided to use that
+            algorithm to achieve clipping as outlined before. &nbsp;I created two clipping windows (top
+            and&nbsp;</span>bottom half of the screen) and used those to intersect each drawn polygon. &nbsp;Given that
+        we know the bounding circle of each drawn polygon, we need to check for this&nbsp;intersection only in a few
+        cases as shown in the image below - when the polygon center is within the inner radius of the x axis.</font>
+</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAdXHXxlsUFZ5bbDHjS_Ogf3JmSOGAE-DD0ViKfivEARPCqRaKYLqqDCFazgE6jhvolxNqQf1ho14xD4GhU29toC4IZie-neBCtoYsPQXo-dEl4EwgS0T4C-yhNPsMFTu3YjZ6krR0QUo/s800/check_intersection.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Check intersection" border="0"
+                        data-original-height="352" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAdXHXxlsUFZ5bbDHjS_Ogf3JmSOGAE-DD0ViKfivEARPCqRaKYLqqDCFazgE6jhvolxNqQf1ho14xD4GhU29toC4IZie-neBCtoYsPQXo-dEl4EwgS0T4C-yhNPsMFTu3YjZ6krR0QUo/d/check_intersection.jpg"
+                        title="Check intersection" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Check intersection<br /></td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left;">Here is the <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/polygon-stacks/polygon-stacks.py"
+        target="_blank">code</a> for this:</p>
+<p style="text-align: left;"><span style="background-color: yellow;">Note: You can run, edit and make your own changes
+        to all the code samples in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).
+        &nbsp;You can uncomment the corresponding lines to reproduce all variants shown in this post.</span></p>
+
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/17361f8ebd?toggleCode=true&amp;runOption=run"
+    width="100%"></iframe>&nbsp;&nbsp;<h3 id="polygon-stacks-output" style="text-align: left;">Outputs</h3>
+<p style="text-align: left;">Here are some outputs of the code above:</p>
+<p style="text-align: left;">I learnt that these impossible shapes are also called as <a
+        href="https://en.wikipedia.org/wiki/Penrose_triangle" target="_blank">Penrose polygons</a>.</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-XBTrEAfWqTKeE0CyMsz9mgClyBAkHf5Qn9y3KpPW24I6_mCwvizkY2nfdVhGAncwfC4i0O1L2CugrX_dL5Ixq0HCZGwWSzlS9AOOplzAgegZCTOi0M7L3Bp2y8cBj49L199jNr8BYMo/s1200/penrose_polygons.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Penrose polygons" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-XBTrEAfWqTKeE0CyMsz9mgClyBAkHf5Qn9y3KpPW24I6_mCwvizkY2nfdVhGAncwfC4i0O1L2CugrX_dL5Ixq0HCZGwWSzlS9AOOplzAgegZCTOi0M7L3Bp2y8cBj49L199jNr8BYMo/d/penrose_polygons.jpg"
+                        title="Penrose polygons" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Penrose polygons</td>
+        </tr>
+    </tbody>
+</table>
+<p style="text-align: left;">Here is an animated version of the pentagon from the image above:</p>
+<p style="text-align: left;"></p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1Md4ceq-o-inWztqCE4A2Ztc3kPcorjXbIHNGXteQ4BmZKK_vYRHLQhQNc8pyFbpPScgclZN_mGRNxDpW0NZLHMcZ7jLp27CQLxh2Dtss5qVHS-zqFTySKYYlk_5Aeub4jUk-aORQFgE/s600/rotating_penrose_pentagon.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Animated Penrose pentagon" border="0"
+                        data-original-height="600" data-original-width="600"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1Md4ceq-o-inWztqCE4A2Ztc3kPcorjXbIHNGXteQ4BmZKK_vYRHLQhQNc8pyFbpPScgclZN_mGRNxDpW0NZLHMcZ7jLp27CQLxh2Dtss5qVHS-zqFTySKYYlk_5Aeub4jUk-aORQFgE/d/rotating_penrose_pentagon.gif"
+                        title="Animated Penrose pentagon" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Animated Penrose pentagon</td>
+        </tr>
+    </tbody>
+</table>
+<p></p>
+<p style="text-align: left;">I also added an option to color the polygons alternatively the way we did in the post on <a
+        href="{{ site.baseurl }}{% post_url 2020-06-07-checkerboards %}" target="_blank">Checkerboards</a>.</p>
+<p style="text-align: left;">Here are some other variants:</p>
+<p style="text-align: left;">(You can uncomment the lines under 'polygon stack variants' section in the code above to
+    reproduce these)</p>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj185mt31v-xpIs-qxtK4DXW7bFmOWfwRpHrMJELXHBDhgs_MW-OXwEKpOm3TsXTwuhkpzqnP-SiQJncyap-L2tIujHiAgV-fLYrWwACenWZ5lMCDSyHpN9etxnP1EUA-Ne9GPdDmkV4uU/s1200/polygonal_variations.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Polygon stack variants" border="0"
+                        data-original-height="1200" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj185mt31v-xpIs-qxtK4DXW7bFmOWfwRpHrMJELXHBDhgs_MW-OXwEKpOm3TsXTwuhkpzqnP-SiQJncyap-L2tIujHiAgV-fLYrWwACenWZ5lMCDSyHpN9etxnP1EUA-Ne9GPdDmkV4uU/d/polygonal_variations.jpg"
+                        title="Polygon stack variants" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">
+                <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                    style="margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td class="tr-caption" style="text-align: center;">Polygon stack variants</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here are some animated variants:</div>
+<div><br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi71d6s5WqaadfZX0fgtBUdZfVfHnkJ9pdv5YXV4kv6zz-lWRf8WwUeEyVMOY1gbSMQ5fFdtsH8SOdijm2ZwqLkOY_Ks0ckBUZ0dSSqB1HHSgqRjVB65iYYE262pRAsKbZJ9r4kJ13KTys/s600/animated_pentagon_stack.gif"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Animated pentagon stack" border="0"
+                            data-original-height="600" data-original-width="600"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi71d6s5WqaadfZX0fgtBUdZfVfHnkJ9pdv5YXV4kv6zz-lWRf8WwUeEyVMOY1gbSMQ5fFdtsH8SOdijm2ZwqLkOY_Ks0ckBUZ0dSSqB1HHSgqRjVB65iYYE262pRAsKbZJ9r4kJ13KTys/d/animated_pentagon_stack.gif"
+                            title="Animated pentagon stack" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Animated pentagon stack<br /></td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0DiJH43Cq3_Lq56RNLuuy7CSVgpkcm6sABO898BL523xBEm5BOo5IPAhEvcFHsSkH9_W3W-CfNFePPCj28aWK_ygBtvH8dYbnGfjjEpsgLj5YfT9gWfe3y-g8c4YeaJ7WOV7p0Yt2mfg/s600/animated_polygon_checkerboard.gif"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Animated polygon checkerboard"
+                            border="0" data-original-height="600" data-original-width="600"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0DiJH43Cq3_Lq56RNLuuy7CSVgpkcm6sABO898BL523xBEm5BOo5IPAhEvcFHsSkH9_W3W-CfNFePPCj28aWK_ygBtvH8dYbnGfjjEpsgLj5YfT9gWfe3y-g8c4YeaJ7WOV7p0Yt2mfg/d/animated_polygon_checkerboard.gif"
+                            title="Animated polygon checkerboard" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Animated polygon checkerboard<br /></td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyuWD_Bpc1xsVBkAy6u7kx3XIZWaH7sGMqepYAiRfLzfVgF-I6aU-ztTNcElniq7VLxfXSgxfRWZXujM6M20xWdXywtNfm7v0nwGyO93O09mLBMwFRXXPRxZ2ppRlXYr4iAKOj9rOeACs/s600/rotating_triangle_checkerboard.gif"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Animated triangle checkerboard"
+                            border="0" data-original-height="600" data-original-width="600"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhyuWD_Bpc1xsVBkAy6u7kx3XIZWaH7sGMqepYAiRfLzfVgF-I6aU-ztTNcElniq7VLxfXSgxfRWZXujM6M20xWdXywtNfm7v0nwGyO93O09mLBMwFRXXPRxZ2ppRlXYr4iAKOj9rOeACs/d/rotating_triangle_checkerboard.gif"
+                            title="Animated triangle checkerboard" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Animated triangle checkerboard<br /></td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="text-align: left;"><br /></p>
+    <h2 id="circular-stacks" style="text-align: left;">Circular Stacks</h2>
+    <p style="text-align: left;">I also implemented the <a href="https://observablehq.com/@mbostock/spiral-stack"
+            target="_blank">Spiral Stack</a> in Python Turtle with the options to use any sided polygon for the inner
+        shape (instead of just a square).</p>
+    <p style="text-align: left;">Here is the <a
+            href="https://github.com/PardhavMaradani/blog/blob/main/polygon-stacks/circular-stacks.py"
+            target="_blank">code</a> for this:</p>
+
+    <iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/dc40d74c48?toggleCode=true&amp;runOption=run" width="100%"></iframe>&nbsp;
+    &nbsp;<h3 id="circular-stacks-output" style="text-align: left;">Outputs</h3>
+    <div>Here are some outputs with triangles as inner shapes:</div>
+    <div><br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikHFiA0GxBkdZ12m2uVxVzeYXMi3Ixa00eaz6WpnN6REYttWavtIqp-kBWozm4BmUofyckxHLYQI_TK_6oGJqrAfrGbDHWAcvaMqBn3TFLgPFFXVlr_GP6LFSKeZyL75VxN_ymgiSOo5g/s1200/circular_variations.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Circular stack variants" border="0"
+                                data-original-height="400" data-original-width="1200"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikHFiA0GxBkdZ12m2uVxVzeYXMi3Ixa00eaz6WpnN6REYttWavtIqp-kBWozm4BmUofyckxHLYQI_TK_6oGJqrAfrGbDHWAcvaMqBn3TFLgPFFXVlr_GP6LFSKeZyL75VxN_ymgiSOo5g/d/circular_variations.jpg"
+                                title="Circular stack variants" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Circular stack variants<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="text-align: left;">Here are some animated variants:</p>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfpUqglamTveiF7RLUAQ3j3P-5y5Y3ak86_DnCB9LoBaN60e8qA6o8ugana72uE5DHyNd3nGm_Q0_do-SPMBbhKj5oB0ZXF-kRd308ha8t-2HN0m85YjHVEMIbsiGM9EivFR7pHyz8Uwk/s680/circular_1.gif"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Rotating circular stack" border="0"
+                                data-original-height="680" data-original-width="680"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhfpUqglamTveiF7RLUAQ3j3P-5y5Y3ak86_DnCB9LoBaN60e8qA6o8ugana72uE5DHyNd3nGm_Q0_do-SPMBbhKj5oB0ZXF-kRd308ha8t-2HN0m85YjHVEMIbsiGM9EivFR7pHyz8Uwk/d/circular_1.gif"
+                                title="Rotating circular stack" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Rotating circular stack<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="text-align: left;"><br /></p>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3TauXHbgXNKuFvmt8F9q1kTqk07FOZJbsP6n1D619gGn2p4LqZgCeMWSOHhBwoybCnmfnQgthDb78Rao-_MJWAjWG9R1luBOQVo92Y8-MYOlG16bp9lC_ets8ExgvVPDy_XVUTvkykBg/s600/animated_circular_checkerboard.gif"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Animated circular checkerboard"
+                                border="0" data-original-height="600" data-original-width="600"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3TauXHbgXNKuFvmt8F9q1kTqk07FOZJbsP6n1D619gGn2p4LqZgCeMWSOHhBwoybCnmfnQgthDb78Rao-_MJWAjWG9R1luBOQVo92Y8-MYOlG16bp9lC_ets8ExgvVPDy_XVUTvkykBg/d/animated_circular_checkerboard.gif"
+                                title="Animated circular checkerboard" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Animated circular checkerboard<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="text-align: left;"><br /></p>
+        <h2 id="summary" style="text-align: left;">Summary</h2>
+        <p style="text-align: left;">In summary, polygons stacked over each other in different ways create very
+            interesting and unique patterns.</p>
+        <p style="text-align: left;">All the code in this post is available on <a
+                href="https://github.com/PardhavMaradani/blog/blob/main/polygon-stacks/" target="_blank">GitHub</a>.</p>
+        <p style="text-align: left;">Finally, here is a collage of some other checkerboard varints:</p>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8tVo0-KNub4vFJCSiHyxtyO5U6Q95CDfGHXg9de1djTh-XzSuQNIIg0CeUt-45koDfTo8Ck_uBi89ylCzeZeLX7nOCaIcKBqlTaf_sTBf0wjhVDSCIT7EiEBR8hN63BogPDm_UuPrhO4/s1200/variants_collage.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Variants collage" border="0"
+                                data-original-height="1200" data-original-width="1200"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8tVo0-KNub4vFJCSiHyxtyO5U6Q95CDfGHXg9de1djTh-XzSuQNIIg0CeUt-45koDfTo8Ck_uBi89ylCzeZeLX7nOCaIcKBqlTaf_sTBf0wjhVDSCIT7EiEBR8hN63BogPDm_UuPrhO4/d/variants_collage.jpg"
+                                title="Variants collage" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Variants collage<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <div dir="ltr" trbidi="on"><br /></div>
+        <h2 id="updates" style="text-align: left;">Updates:</h2>
+        <div dir="ltr" trbidi="on">5 July 2020</div>
+        <div dir="ltr" trbidi="on">
+            <ol>
+                <li>A fully interactive version of Polygon and Circular Stacks can be found in this later&nbsp;<a
+                        href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}" target="_blank">post</a>.</li>
+            </ol>
+            <div>- Pardhav Maradani</div>
+        </div>
+    </div>
+</div>

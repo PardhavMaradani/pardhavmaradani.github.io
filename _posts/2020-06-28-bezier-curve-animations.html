@@ -1,0 +1,267 @@
+---
+layout: post
+title: Bézier Curve Animations
+date: '2020-06-28T10:05:00.012+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T13:08:02.331+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWNKDkDYS3hvGbLZHqu59f5KCEf7JKitQOtB84nminhEjt9cVoacnGxpnoZvpG3lKTz0XTUQUhfXSBerM4HcRcX226pzKfTtx4DG3a-i4Rbzch8QAtRF-rx7Or8W5OhXp2Mev9BfYxtPY/s72-c-d/bezier_curve_animations.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-7606843792734326760
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/06/bezier-curve-animations.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWNKDkDYS3hvGbLZHqu59f5KCEf7JKitQOtB84nminhEjt9cVoacnGxpnoZvpG3lKTz0XTUQUhfXSBerM4HcRcX226pzKfTtx4DG3a-i4Rbzch8QAtRF-rx7Or8W5OhXp2Mev9BfYxtPY/s1200/bezier_curve_animations.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWNKDkDYS3hvGbLZHqu59f5KCEf7JKitQOtB84nminhEjt9cVoacnGxpnoZvpG3lKTz0XTUQUhfXSBerM4HcRcX226pzKfTtx4DG3a-i4Rbzch8QAtRF-rx7Or8W5OhXp2Mev9BfYxtPY/s1200/bezier_curve_animations.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Bézier curve animations" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWNKDkDYS3hvGbLZHqu59f5KCEf7JKitQOtB84nminhEjt9cVoacnGxpnoZvpG3lKTz0XTUQUhfXSBerM4HcRcX226pzKfTtx4DG3a-i4Rbzch8QAtRF-rx7Or8W5OhXp2Mev9BfYxtPY/d/bezier_curve_animations.jpg"
+                        title="Bézier curve animations" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table-->
+<div>In a previous <a href="{{ site.baseurl }}{% post_url 2020-06-14-trees %}" target="_blank">post</a> about Trees, I
+    used straight lines and parts of circles to create curves. &nbsp;Since then, I am learning more about curves and
+    came across Bézier curves. &nbsp;I liked the animations shown in the Wikipedia <a
+        href="https://en.wikipedia.org/wiki/Bézier_curve" target="_blank">link</a> and wondered if I could draw them
+    using Python Turtle.</div>
+<div><br /></div>
+<div>I also wanted to make this interactive where I could pause and resume the animations, add more control points, move
+    them anywhere on the screen, etc.</div><span><a name='more'></a></span>
+<div><br /></div>
+<h2 id="bezier-curve-animation" style="text-align: left;">Bézier Curve Animation</h2>
+<div>The actual <a href="https://en.wikipedia.org/wiki/Bézier_curve#Constructing_Bézier_curves"
+        target="_blank">construction</a> of Bézier curves as mentioned on Wikipedia is straight forward and uses
+    something called&nbsp;De Casteljau's algorithm. &nbsp;It is a recursive method as follows:</div>
+<div><br /></div>
+<div>For N control points:</div>
+<div>
+    <ul style="text-align: left;">
+        <li>We have N - 1 initial segments connecting them</li>
+        <li>For each t between 0 and 1, we connect points that are t times the length of the segment. &nbsp;We now get N
+            - 1 control points and N - 2 segments between them</li>
+        <li>We repeat the previous step till we have one point, which is the terminating condition for our recursive
+            function</li>
+    </ul>
+</div>
+<div>Please see the 'get_bezier_point' function in the code shown below for this implementation.</div>
+<div><br /></div>
+<div>I then added buttons using different Python Turtles with custom shapes for play / pause, increment and decrement
+    control points.</div>
+<div><br /></div>
+<div>To be able to move the control points, I decided to use different Turtles for each control point. &nbsp;I soon
+    realised that there was a problem in distinguishing which control point was being clicked and dragged. &nbsp;I think
+    this is a problem specific to Trinket (but I am not sure). &nbsp;So, I then learnt about how to create a custom
+    Turtle using Classes and extend it. &nbsp;This gave me the ability to clearly identify each control point.
+    &nbsp;Please see the 'ControlPoint' Class in the code shown below.</div>
+<div><br /></div>
+<div>When we drag and move the control points, we have to redraw the Bézier curve upto the current t value (shown in
+    'red' in the image below). &nbsp;This is a special case. &nbsp;Other than that, we draw the connecting line segments
+    as described in the algorithm above.</div>
+<div><br /></div>
+<div>Here is an example animation of the output that I got once I did this:</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLgL2fkGPVo9CoVjVseF2vAF3U_izk6TreP21s0yaZ1d3HG0QVh2CgT0yjACizcQaLaIms7qPCKqprB0hjuO6kx38JEjVvrDWmQCDjoNmvs_3YsNVNhsIGmMv97znrbg4oZa_my57QVVU/s560/bezier_curve_animation.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Bézier curve animation" border="0"
+                        data-original-height="500" data-original-width="560"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLgL2fkGPVo9CoVjVseF2vAF3U_izk6TreP21s0yaZ1d3HG0QVh2CgT0yjACizcQaLaIms7qPCKqprB0hjuO6kx38JEjVvrDWmQCDjoNmvs_3YsNVNhsIGmMv97znrbg4oZa_my57QVVU/d/bezier_curve_animation.gif"
+                        title="Bézier curve animation" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Bézier curve animation<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/bezier-curve-animations/bezier-curves.py"
+        target="_blank">code</a> for the above:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).
+        &nbsp;Each run produces a different random output in all the examples below. &nbsp;You can play / pause the
+        animation, add / delete control points, click and drag them. <br /></span></div>
+<div><span style="background-color: yellow;"><br /></span></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/99a4c5990a?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div><br /></div>
+<h2 id="relation-to-pursuit-curves" style="text-align: left;">Relation to Pursuit Curves</h2>
+<div>Towards the end of a previous <a href="{{ site.baseurl }}{% post_url 2020-05-31-polygons-in-polygons %}"
+        target="_blank">post</a> (Polygons in Polygons), I mentioned about Pursuit polygons, <a
+        href="https://mathworld.wolfram.com/MiceProblem.html" target="_blank">mice problem</a>, etc. &nbsp;Looking at
+    the animations above, I noticed quite a lot of similarity with those as the lines were in pursuit of one another.
+    &nbsp;To show this more clearly, I drew the points of the curve from each of the control points which were in
+    pursuit of the other curves which were emerging from the next control point.</div>
+<div><br /></div>
+<div>Here is a reference Bézier curve that I will use to illustrate:</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuHqyIvlPHUBZK_HhLIwcPeTaKqw6WVS6ooc-R-zc5fIemgUYnjjuyaXrKh51IwDbvibVLosoK3eXTwPGNCInTuVtEkUPQdtK0FXaCYyRAslMaTBJKvqUr_rViOGxdbbRZqLs0W2b4QM4/s560/bezier_curves_pursuit_reference.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Bézier curves in pursuit reference"
+                        border="0" data-original-height="420" data-original-width="560"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuHqyIvlPHUBZK_HhLIwcPeTaKqw6WVS6ooc-R-zc5fIemgUYnjjuyaXrKh51IwDbvibVLosoK3eXTwPGNCInTuVtEkUPQdtK0FXaCYyRAslMaTBJKvqUr_rViOGxdbbRZqLs0W2b4QM4/d/bezier_curves_pursuit_reference.jpg"
+                        title="Bézier curves in pursuit reference" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">
+                <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                    style="margin-left: auto; margin-right: auto;">
+                    <tbody>
+                        <tr>
+                            <td class="tr-caption" style="text-align: center;">Bézier curves in pursuit reference</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is an animation to illustrate the pursuit behaviour of the same curve shown above:</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi25ZPgwpQSHeS2iQlIxl3qSkcuTtF9nsLHl-JjU7u8LKD7D-nEfzXyrN9OqXFhh-O0c9uPA3MqgPPRBSNcrsgwEwUqm1ra19XHCLtU7eqGQo7CCiV_zkKpCA77yw_ekCkmWqneEBZYv3c/s560/bezier_curves_pursuit.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Bézier curves in pursuit" border="0"
+                        data-original-height="420" data-original-width="560"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi25ZPgwpQSHeS2iQlIxl3qSkcuTtF9nsLHl-JjU7u8LKD7D-nEfzXyrN9OqXFhh-O0c9uPA3MqgPPRBSNcrsgwEwUqm1ra19XHCLtU7eqGQo7CCiV_zkKpCA77yw_ekCkmWqneEBZYv3c/d/bezier_curves_pursuit.gif"
+                        title="Bézier curves in pursuit" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Bézier curves in pursuit<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>As you can see from the animation above, the actual Bézier curve (which is shown in 'red' starting from p0), is
+    essentially in pursuit of the curve starting from p1 (in blue), which itself is in pursuit of the curve starting
+    from p2 (in firebrick), etc, etc. &nbsp;I used the default Turtle shape to show where they are headed. &nbsp;The
+    curve from the last but one to the last control point is always a straight line (p4 to p4 above) as can be seen
+    above as well.</div>
+<div><br /></div>
+<div>I see a lot of similarity to <a href="https://mathworld.wolfram.com/PursuitCurve.html" target="_blank">Pursuit
+        curves</a>&nbsp;(and mice problem, etc), but didn't see this mentioned elsewhere.</div>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/bezier-curve-animations/pursuit-curves.py"
+        target="_blank">code</a> for the above:<br /></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/cb88f35b30?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+<div><br /></div>
+<h2 id="diverging-bezier-curves" style="text-align: left;">Diverging Bézier Curves</h2>
+<div>After that, I wanted to reverse the direction of the curves to see how this looks. &nbsp;Instead of all curves
+    converging at one point, we should now see all curves starting at one point (last control point) and diverging from
+    there to their respective control points.</div>
+<div><br /></div>
+<div>Here is an example animation of this:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM9yHdyYEHYgBaiVzeb8OreeiL4e70GwAHqhf3BO-GGx0TfeBHDcI3Duj5lLFsYVDHoDLprCUzx91RLmGh6yPkh6lPrDNgsbbovWNTGqY1y0_zblfgNSsB1kqYjiuLatw4DSK9NT7uG9c/s560/diverging_bezier_curves.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Diverging Bézier curves" border="0"
+                        data-original-height="420" data-original-width="560"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM9yHdyYEHYgBaiVzeb8OreeiL4e70GwAHqhf3BO-GGx0TfeBHDcI3Duj5lLFsYVDHoDLprCUzx91RLmGh6yPkh6lPrDNgsbbovWNTGqY1y0_zblfgNSsB1kqYjiuLatw4DSK9NT7uG9c/d/diverging_bezier_curves.gif"
+                        title="Diverging Bézier curves" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Diverging Bézier curves<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>This looks like something we could use to trace the path of fireworks launched from a single source, etc. &nbsp;All
+    the curves reach their destination at the same time but follow different curved paths to get there. &nbsp;</div>
+<div><br /></div>
+<div>Here is the <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/bezier-curve-animations/diverging-bezier-curves.py"
+        target="_blank">code</a> for the above animations:</div>
+<div><br /></div>
+<div>(There is a variable called 'g_shuffle' in the code below that you can set to True to randomise the curves while
+    keeping the control points the same.)</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/0186d9b60b?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+<div><br /></div>
+<h2 id="relation-to-rotating-polygons" style="text-align: left;">Relation to Rotating Polygons</h2>
+<div>When I first saw the Bézier curve animations, I saw a similarity to rotating polygons in polygons that I wrote
+    about in a previous <a href="{{ site.baseurl }}{% post_url 2020-05-31-polygons-in-polygons %}"
+        target="_blank">post</a>. &nbsp;There, I was using a fixed offset to move along the outer edge of a polygon to
+    draw the inner rotated polygon and repeat it. &nbsp;This is similar to what is happening here in the algorithm
+    mentioned before in the construction of Bézier curves, but done recursively.</div>
+<div><br /></div>
+<div>I made minor changes to generate these rotating polygons using the same code to generate Bézier curves as shown
+    below.</div>
+<div><br /></div>
+<div>Here is an example animation of an irregular polygon rotating within itself towards the centre:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgncU8Zs1PSk8tsdARIXbCHmSWVMhFEJjnrYv4TTjiK4p1fjiXxqU13i26dIdLFRmNiDFHPJuBgMFKTh7maeoYYp51x48dPQh1k-k1UrCXhs0oYCWfajIeGmOXPltt_nQTs2t0VRc4dGO4/s560/rotating_spirals.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Rotating spirals" border="0"
+                        data-original-height="420" data-original-width="560"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgncU8Zs1PSk8tsdARIXbCHmSWVMhFEJjnrYv4TTjiK4p1fjiXxqU13i26dIdLFRmNiDFHPJuBgMFKTh7maeoYYp51x48dPQh1k-k1UrCXhs0oYCWfajIeGmOXPltt_nQTs2t0VRc4dGO4/d/rotating_spirals.gif"
+                        title="Rotating spirals" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Rotating spirals<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/bezier-curve-animations/rotating-spirals.py"
+        target="_blank">code</a> for the above:</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/731c1fbac1?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+
+<div><br /></div>
+<h2 id="summary" style="text-align: left;">Summary</h2>
+<div>In summary, Bézier curves are very interesting. &nbsp;We can relate them to a lot of other things. &nbsp;I can see
+    using them in the future for a variety of things.</div>
+<div><br /></div>
+<div>All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/bezier-curve-animations/" target="_blank">GitHub</a>.
+</div>
+<h2 id="updates" style="text-align: left;">Updates:</h2>
+<div>
+    <div dir="ltr" trbidi="on">5 July 2020</div>
+    <div dir="ltr" trbidi="on">
+        <ol>
+            <li>An interactive version of all the example here can be found in this later&nbsp;<a
+                    href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}" target="_blank">post</a>.</li>
+        </ol>
+        <div>- Pardhav Maradani</div>
+    </div>
+</div>

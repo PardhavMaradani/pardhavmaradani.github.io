@@ -1,0 +1,299 @@
+---
+layout: post
+title: Trees
+date: '2020-06-14T12:24:00.010+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T13:10:16.207+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAQzdaXX2EiSNxIrQMRrFOWER-m416Hy4VB2g_qz0sdwIXhgJ3SULen-K_yTbWtoFJXzTpeG6AaqGp2Xo9RaexMByvoG-gv-2f6UtJ1PWqOf0iMfbF48dFeh7-4wLVgCtgpHB-O76NxDY/s72-c-d/trees.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-2324759986602775952
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/06/trees.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAQzdaXX2EiSNxIrQMRrFOWER-m416Hy4VB2g_qz0sdwIXhgJ3SULen-K_yTbWtoFJXzTpeG6AaqGp2Xo9RaexMByvoG-gv-2f6UtJ1PWqOf0iMfbF48dFeh7-4wLVgCtgpHB-O76NxDY/s1200/trees.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAQzdaXX2EiSNxIrQMRrFOWER-m416Hy4VB2g_qz0sdwIXhgJ3SULen-K_yTbWtoFJXzTpeG6AaqGp2Xo9RaexMByvoG-gv-2f6UtJ1PWqOf0iMfbF48dFeh7-4wLVgCtgpHB-O76NxDY/s1200/trees.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Trees" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAQzdaXX2EiSNxIrQMRrFOWER-m416Hy4VB2g_qz0sdwIXhgJ3SULen-K_yTbWtoFJXzTpeG6AaqGp2Xo9RaexMByvoG-gv-2f6UtJ1PWqOf0iMfbF48dFeh7-4wLVgCtgpHB-O76NxDY/d/trees.jpg"
+                        title="Trees" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div-->
+<div>I learnt about recursion. &nbsp;There are lots of examples of drawing trees using recursion and Python Turtle.
+    &nbsp;I wanted to try these and also see if I can do something different that wasn't done before.</div><span><a
+        name='more'></a></span>
+<div><br /></div>
+<h2 id="basic-trees" style="text-align: left;">Basic Trees</h2>
+<div>Here is an output of a basic tree with code adapted from <a href="https://programmer.help/blogs/5de68666adfb1.html"
+        target="_blank">here</a>, which draws a simple tree with random lengths and angles.</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbjC8UGFHHpQDhYqvvjqrOQr_2SxzvHV3KpZgjF67-prmK_WiZPpUGzvnh0Gedtdzc81cNxGz70xHB4DvqKCvzR8NMG2mqN29sTEPxSCp-uKt6q87aVy0mIpofKxgoix8hPRT4OXJaGkw/s800/basic_tree.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Basic tree" border="0"
+                        data-original-height="534" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbjC8UGFHHpQDhYqvvjqrOQr_2SxzvHV3KpZgjF67-prmK_WiZPpUGzvnh0Gedtdzc81cNxGz70xHB4DvqKCvzR8NMG2mqN29sTEPxSCp-uKt6q87aVy0mIpofKxgoix8hPRT4OXJaGkw/d/basic_tree.jpg"
+                        title="Basic tree" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Basic tree (seed 26441)<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/basic-trees.py"
+        target="_blank">code</a> to draw these basic trees:<br /></div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).
+        &nbsp;Each run produces a different random output in all the examples below. &nbsp;You can use the seed
+        mentioned in the image captions to reproduce the exact same output.</span></div>
+<div><br /></div>
+
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/6b490f983c?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div><br /></div>
+<h2 id="curved-trees" style="text-align: left;">Curved Trees</h2>
+<div>To me these trees looked a bit unnatural as they are made entirely of straight lines. &nbsp;I wanted to try and see
+    if we could draw these with curved instead of straight lines to make them look a bit more natural.</div>
+<div><br /></div>
+<div>To connect two straight lines with a curve, I used the method shown below:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEozCXX_s0E4Y-owyH3Ma-NxzwXxyHldYK24qRwUvkfeS6pazll2PQc6iHoX2SlLAeY77fPktd1wLKbYaxqEOkg8yzPbSVnYrNCAGOKxzlj6TdZWDH4NG-oQm02qTsxG637hM0BmQnFkU/s800/curved_line_method.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Curved line method" border="0"
+                        data-original-height="400" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEozCXX_s0E4Y-owyH3Ma-NxzwXxyHldYK24qRwUvkfeS6pazll2PQc6iHoX2SlLAeY77fPktd1wLKbYaxqEOkg8yzPbSVnYrNCAGOKxzlj6TdZWDH4NG-oQm02qTsxG637hM0BmQnFkU/d/curved_line_method.jpg"
+                        title="Curved line method" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Curved line method<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>This is an example of how a tree looks when it is drawn with curved lines:<br /></div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOzfyynNSukDb-Td3PFu5MbmVCEE6mf_veJZgLsrfmUT1ouKOspfHFEtVgTBJDkYbw6SW4pAhM4mcQ7af7s3z5119VmNEYrwZNlJog1QzNvqGksUMPbuFast92AsEkiyFqEsUCFCo8DTw/s800/curved_tree.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Curved tree" border="0"
+                        data-original-height="534" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhOzfyynNSukDb-Td3PFu5MbmVCEE6mf_veJZgLsrfmUT1ouKOspfHFEtVgTBJDkYbw6SW4pAhM4mcQ7af7s3z5119VmNEYrwZNlJog1QzNvqGksUMPbuFast92AsEkiyFqEsUCFCo8DTw/d/curved_tree.jpg"
+                        title="Curved tree" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Curved tree (seed 64205)<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/curved-trees.py"
+        target="_blank">code</a> to draw the same trees shown before with curved lines:</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/f9f3256ebb?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+
+<div><br /></div>
+<div>Here is an image comparing trees with straight lines (left), a bit curved (center) and more curved (right).
+    &nbsp;The curve factor used to generate these variants are shown under the image below.</div>
+<div>&nbsp;</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguGnWKrpE3cEfcnYTbPmK9dFBizYyeKKHd7B15iIBWVwNgsqZzUGylBENe2zMlI0bDnS4jFmDKt_rr_F3PWIlLQQdsREg7zqkASGKCVAKrxmhabxEbfKR-9C2FRYmwk8OBiEsKltdTicQ/s800/curve_comparisons.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Curve comparisons" border="0"
+                        data-original-height="400" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguGnWKrpE3cEfcnYTbPmK9dFBizYyeKKHd7B15iIBWVwNgsqZzUGylBENe2zMlI0bDnS4jFmDKt_rr_F3PWIlLQQdsREg7zqkASGKCVAKrxmhabxEbfKR-9C2FRYmwk8OBiEsKltdTicQ/d/curve_comparisons.jpg"
+                        title="Curve comparisons" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Curved tree comparison (original, 0.25, 0.5)</td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<h2 id="hollow-trees" style="text-align: left;">Hollow Trees</h2>
+<div>I haven't seen any examples of trees which are hollow (or double lined) in Python Turtle, similar to pencil drawn
+    trees. &nbsp;So, I wondered if we could draw these and also shade them if possible, just like in pencil shading.
+</div>
+<div><br /></div>
+<div>This is what I had in mind:</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBgOnE6HIJtKHQUZ8CWBJbxTcP8JIMrKR7R6cVWwOs5f8U49JGlGw8EztlW0xYJaaZK6duMkPuPZp9Mq5zG0wUDDMJxqroLAW8SZATRwR6oN3FGQ54eWloy5B7asRywFUjlDqmqmfD1XU/s800/hollow_tree_expected.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Expected hollow tree" border="0"
+                        data-original-height="400" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBgOnE6HIJtKHQUZ8CWBJbxTcP8JIMrKR7R6cVWwOs5f8U49JGlGw8EztlW0xYJaaZK6duMkPuPZp9Mq5zG0wUDDMJxqroLAW8SZATRwR6oN3FGQ54eWloy5B7asRywFUjlDqmqmfD1XU/d/hollow_tree_expected.jpg"
+                        title="Expected hollow tree" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Expected hollow tree<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>To draw a hollow branch, we have to draw three separate curves (c1, c2, c3 as shown in the image below). &nbsp;The
+    beginning and end points are at right angles to each other. &nbsp;Recursion takes care of repeating these inside.
+</div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFVgFj4DTmTKfnlnUBsug83D9LwJKoiPyJpvyv6vUbhm_r2ou9gt5Cr8xU29yV1RpkqCSmhpKge0zRzRGMzWqnJG4c0cQ-tfROChRpSbyNpvm5arj4EgPBos4NXtNOQO-oXbdF9mJL8KQ/s800/hollow_tree_method.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Hollow tree method" border="0"
+                        data-original-height="400" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFVgFj4DTmTKfnlnUBsug83D9LwJKoiPyJpvyv6vUbhm_r2ou9gt5Cr8xU29yV1RpkqCSmhpKge0zRzRGMzWqnJG4c0cQ-tfROChRpSbyNpvm5arj4EgPBos4NXtNOQO-oXbdF9mJL8KQ/d/hollow_tree_method.jpg"
+                        title="Hollow tree method" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Hollow tree method<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Once I could draw this, this was the output that I got:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguhS2O3MuhSGreJ_c9mNhRw-pESTU8THxkD2DNyGL7jb5x1u4RbWYF6BOKNMiQFVyX5PtUSrcHLUWZjvQ7RheSjMEdUBK59XX2QqhgZaJPf06McGmAPmkz-zU8QZcYiPG1c1fKQUY7piM/s800/hollow_tree.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Hollow tree" border="0"
+                        data-original-height="534" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguhS2O3MuhSGreJ_c9mNhRw-pESTU8THxkD2DNyGL7jb5x1u4RbWYF6BOKNMiQFVyX5PtUSrcHLUWZjvQ7RheSjMEdUBK59XX2QqhgZaJPf06McGmAPmkz-zU8QZcYiPG1c1fKQUY7piM/d/hollow_tree.jpg"
+                        title="Hollow tree" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Hollow tree (seed 61327)</td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/hollow-trees.py"
+        target="_blank">code</a> to draw these hollow trees:</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/6c41115cdc?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+
+<div><br /></div>
+<h2 id="shaded-trees" style="text-align: left;">Shaded Trees</h2>
+<div>Now that we can draw hollow trees with curved lines, I wanted to shade these using a hatching technique used in
+    pencil shading.</div>
+<div><br /></div>
+<div>Here is an output that I got when I drew a shaded tree:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKTiwrYpaERF6sfDmXApExLOB-xqWFSoyPaBiw644Ba2UJuiEGyc9CdeCPYobdBh4IYnyUrM0q62j3HwsxWLFcv2sWq4MykmZpj2Be_5EDuvPt90q5zs9dKdiDV5oN4y149e_DqTvO1Aw/s800/shaded_tree.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Shaded tree" border="0"
+                        data-original-height="534" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKTiwrYpaERF6sfDmXApExLOB-xqWFSoyPaBiw644Ba2UJuiEGyc9CdeCPYobdBh4IYnyUrM0q62j3HwsxWLFcv2sWq4MykmZpj2Be_5EDuvPt90q5zs9dKdiDV5oN4y149e_DqTvO1Aw/d/shaded_tree.jpg"
+                        title="Shaded tree" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Shaded tree (seed 65094)<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/shaded-trees.py"
+        target="_blank">code</a> to draw these shaded trees:</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/e2aa71d0a3?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div>&nbsp; &nbsp;&nbsp;<h2 id="variants" style="text-align: left;">Variants</h2>
+    <div>We can also change the Turtle pen widths according to the recursion level. &nbsp;Here is a comparison to the
+        previous ones on how they look:</div>
+    <div><br /></div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2DDlS7S7c_2wOmLkOr5Gsx14QIRSgg0f74HblJdRhlWgpDdPWwPfgwWNBwTuRDqUY5_EjyfLF1985HrMOa6l1iwgx2CTbBtz7zcZxJ_ubW2izXmTHRDab_tgNH1YaxQfvhbVrUVobrtY/s800/shaded_comparison.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Shading comparison" border="0"
+                            data-original-height="534" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2DDlS7S7c_2wOmLkOr5Gsx14QIRSgg0f74HblJdRhlWgpDdPWwPfgwWNBwTuRDqUY5_EjyfLF1985HrMOa6l1iwgx2CTbBtz7zcZxJ_ubW2izXmTHRDab_tgNH1YaxQfvhbVrUVobrtY/d/shaded_comparison.jpg"
+                            title="Shading comparison" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Shading comparison (seed 37380)</td>
+            </tr>
+        </tbody>
+    </table>
+    <div><br /></div>
+    <div>Here is an output with varying pen widths:</div>
+    <div><br /></div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwTZcxi8zywr9F_bQ7NQ0WKeRQSsc7IcJRuRWGeiE8wJ1kI8BE3PsxUgaSnR7zul95tRfd2TkX_nS-IdRbGVh8BDuATv5LKsluKh2clqpFGyyUuteK3ZY7WBErYRlUTay_BKSQzzFAVhk/s800/variant1.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Shaded variant" border="0"
+                            data-original-height="534" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwTZcxi8zywr9F_bQ7NQ0WKeRQSsc7IcJRuRWGeiE8wJ1kI8BE3PsxUgaSnR7zul95tRfd2TkX_nS-IdRbGVh8BDuATv5LKsluKh2clqpFGyyUuteK3ZY7WBErYRlUTay_BKSQzzFAVhk/d/variant1.jpg"
+                            title="Shaded variant" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Shaded variant (seed 16605)<br /></td>
+            </tr>
+        </tbody>
+    </table>
+    <div>&nbsp;</div>
+    <div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/shaded-tree-variants.py"
+            target="_blank">code</a> to draw this variant:</div>
+    <div><br /></div>
+    <iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/2d7bb51852?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+
+
+    <div><br /></div>
+    <h2 id="summary" style="text-align: left;">Summary</h2>
+    <div>In summary, we can draw lots of different types of trees using Python Turtle which look nice and natural.</div>
+    <div><br /></div>
+    <div>All the code in this post is available on <a href="https://github.com/PardhavMaradani/blog/blob/main/trees/"
+            target="_blank">GitHub</a>.</div>
+    <div><br /></div>
+</div>
+<div>- Pardhav Maradani</div>

@@ -1,0 +1,212 @@
+---
+layout: post
+title: Interactive Voronoi
+date: '2020-07-19T13:47:00.006+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T11:33:40.498+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrphWO9NAmjv2TDPQNI-cAfXTXAmW_DIwrmzk6rkLbJjl3yTVZGCC4ZryYv5BLFO40swOnxnlAlFndmSTABubY6QlXR1grRzqwd8wum1pmac3gc7GLTV5RDroHKpyDf7jIt45f8K5-ybI/s72-c-d/interactive_voronoi.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-8747440895056196745
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/07/interactive-voronoi.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrphWO9NAmjv2TDPQNI-cAfXTXAmW_DIwrmzk6rkLbJjl3yTVZGCC4ZryYv5BLFO40swOnxnlAlFndmSTABubY6QlXR1grRzqwd8wum1pmac3gc7GLTV5RDroHKpyDf7jIt45f8K5-ybI/s1200/interactive_voronoi.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrphWO9NAmjv2TDPQNI-cAfXTXAmW_DIwrmzk6rkLbJjl3yTVZGCC4ZryYv5BLFO40swOnxnlAlFndmSTABubY6QlXR1grRzqwd8wum1pmac3gc7GLTV5RDroHKpyDf7jIt45f8K5-ybI/s1200/interactive_voronoi.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Voronoi" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrphWO9NAmjv2TDPQNI-cAfXTXAmW_DIwrmzk6rkLbJjl3yTVZGCC4ZryYv5BLFO40swOnxnlAlFndmSTABubY6QlXR1grRzqwd8wum1pmac3gc7GLTV5RDroHKpyDf7jIt45f8K5-ybI/d/interactive_voronoi.jpg"
+                        title="Interactive Voronoi" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table-->
+<div>I learnt about Voronoi diagrams while working on a previous <a
+        href="{{ site.baseurl }}{% post_url 2020-07-12-voronoi-whirls %}" target="_blank">post</a>. &nbsp;In that post,
+    all the seeds were generated randomly. &nbsp;I wanted to try something a bit more interactive so I have more control
+    over how the Voronoi are generated.</div><span><a name='more'></a></span>
+<div><br /></div>
+<h2 id="voronoi-points" style="text-align: left;">Voronoi Points</h2>
+<div>I started with something very basic, which is to create seeds where I click on the screen and generate the
+    corresponding Voronoi.</div>
+<div><br /></div>
+<div>Here are some examples of Voronoi diagrams created this way:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK6Q9IbhHMfAMl5a1w6ENDSdJsFbVdB_0bbOJKU-ODBJXgMvKpg7zqHKobLcJkCpIVnWOLJhrNf1fnShKHlR4hxnY4UtYME1dIPfgET3AABmPBr7EPi6K_lN86va23yzf-ylNGbjvO_FI/s1200/voronoi_points_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Voronoi Points Examples"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK6Q9IbhHMfAMl5a1w6ENDSdJsFbVdB_0bbOJKU-ODBJXgMvKpg7zqHKobLcJkCpIVnWOLJhrNf1fnShKHlR4hxnY4UtYME1dIPfgET3AABmPBr7EPi6K_lN86va23yzf-ylNGbjvO_FI/d/voronoi_points_examples.jpg"
+                        title="Interactive Voronoi Points Examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive&nbsp;Voronoi Points Examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is an illustration of Voronoi points:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbFjBeoad3sgfq_o-c-w8QQDthtegfdieJ0_21t_B9Jj0Lbdw0rRIuILLcvWP7rs2hMFeREKGlK8elWS1OWLuZgVV8ihOCbnBvznFFzv0XvHffpZf_wPKDt6QaCaVz52gYp5EPExHpyHs/s800/voronoi_points_video.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Points Illustration" border="0"
+                        data-original-height="530" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbFjBeoad3sgfq_o-c-w8QQDthtegfdieJ0_21t_B9Jj0Lbdw0rRIuILLcvWP7rs2hMFeREKGlK8elWS1OWLuZgVV8ihOCbnBvznFFzv0XvHffpZf_wPKDt6QaCaVz52gYp5EPExHpyHs/d/voronoi_points_video.gif"
+                        title="Voronoi Points Illustration" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Points Illustration<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/interactive-voronoi/voronoi-points.py"
+        target="_blank">code</a> for interactive Voronoi points:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span
+        style="background-color: yellow;">).&nbsp;</span></div>
+<div><br /></div>
+<div><span style="background-color: yellow; text-align: center;">Click on ▶ to run the interactive example.</span></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/17e4c5d950?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<h2 id="voronoi-kaleidoscope" style="text-align: left;">Voronoi Kaleidoscope</h2>
+<div>I then wondered if I could create some symmetric patterns without having to create too many points. &nbsp;My first
+    idea was to mirror the points like in a Kaleidoscope. &nbsp;There were some problems with the Voronoi code I am
+    using with mirrored points, so I chose to simply rotate the points along some given sectors. &nbsp;I also added the
+    ability to increase (or decrease) the sectors, which multiply the number of points. &nbsp;With this, we can create
+    some nice circular patterns with minimal input points.</div>
+<div><br /></div>
+<div>Here are some examples of Voronoi created this way:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5B8FlM8LmgQLXdLGBkmp2JXoAsywKfZ6QfGVFVzDAPbkL3QqmqBac0QwOtkdyvINdw0MRezKhaHUALhA4uY9SV7Id1S6T14WDmHJ16gWGanhC8qQkI00mkiEpK9L_-IQhRmuUaLcdMCk/s1200/voronoi_kaleidoscope_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Voronoi Kaleidoscope Examples"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5B8FlM8LmgQLXdLGBkmp2JXoAsywKfZ6QfGVFVzDAPbkL3QqmqBac0QwOtkdyvINdw0MRezKhaHUALhA4uY9SV7Id1S6T14WDmHJ16gWGanhC8qQkI00mkiEpK9L_-IQhRmuUaLcdMCk/d/voronoi_kaleidoscope_examples.jpg"
+                        title="Interactive Voronoi Kaleidoscope Examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive&nbsp;Voronoi Kaleidoscope Examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is an illustration of Voronoi Kaleidoscope:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4XVZYKGoUjY8_IAbCA0q7m25JhPePZw19KYDIjyubqjR0XD3bZQTIgwYl8qo2MksP45AkDYVkIbP0sTs5yHvii186k3DeCISVnFzy5ywxcoTBuUCkXRtFser16V6lS4xLrFTJKVpizlA/s800/voronoi_kaleidoscope_video.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Voronoi Kaleidoscope Illustration"
+                        border="0" data-original-height="530" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4XVZYKGoUjY8_IAbCA0q7m25JhPePZw19KYDIjyubqjR0XD3bZQTIgwYl8qo2MksP45AkDYVkIbP0sTs5yHvii186k3DeCISVnFzy5ywxcoTBuUCkXRtFser16V6lS4xLrFTJKVpizlA/d/voronoi_kaleidoscope_video.gif"
+                        title="Voronoi Kaleidoscope Illustration" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Voronoi Kaleidoscope Illustration<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/interactive-voronoi/voronoi-kaleidoscope.py"
+        target="_blank">code</a> for interactive Voronoi Kaleidoscope:</div>
+<div><br /></div>
+<div><span style="background-color: yellow; text-align: center;">Click on ▶ to run the interactive example.</span></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/e122ca6346?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<h2 id="voronoi-collage" style="text-align: left;">Voronoi Collage</h2>
+<div>One of the uses of Voronoi diagrams is to divide a space which follow a nice mathematical property. &nbsp;An
+    interesting application of this would be to create photo collages. &nbsp;I didn't find many examples of these online
+    apart from this <a href="https://www.albanydesign.co.uk/images/montages/600_voronoi_steve.jpg"
+        target="_blank">one</a>. &nbsp;I wanted to try at least the basic mechanism of it in Python Turtle to see how it
+    goes. &nbsp;I used code examples from previous posts to create sliders, movable seeds, etc. &nbsp;There is more work
+    to do to get even spacing between the polygons (need to find intersections between lines parallel to the polygon
+    edges, rounding the corners, etc) for the future.</div>
+<div><br /></div>
+<div>Here are some examples of this:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNxCmz8-kNogTGgy9-R3k_zmPEm9C_Ylv21l5BK5uGZqBX4Eg5yOIgag-LPwMcox9e7IZIci3gUBqN5uO914gEtlmeHfHgQ2Exyxwi1zBGwU3QPI-S-XJ0eJ3RsMAHrrP6v2mOJRyVtA8/s1200/voronoi_collage_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Voronoi Collage Examples"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNxCmz8-kNogTGgy9-R3k_zmPEm9C_Ylv21l5BK5uGZqBX4Eg5yOIgag-LPwMcox9e7IZIci3gUBqN5uO914gEtlmeHfHgQ2Exyxwi1zBGwU3QPI-S-XJ0eJ3RsMAHrrP6v2mOJRyVtA8/d/voronoi_collage_examples.jpg"
+                        title="Interactive Voronoi Collage Examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive&nbsp;Voronoi Collage Examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is an illustration of interactive Voronoi Collage:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNtqh4nilgStcltKi8IES_CY5zO4nuavsamJ9XljKPREoG46hyphenhyphenKbzp_DftFFK0Va4xTYafVSXyLm53h-he63wNST2-J8WOh4Z5GHgc8mdABSi7Rb5uwxcS7b_DFtuGhcsy1scRhIZdspM/s800/voronoi_collage_video.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Voronoi Collage Illustration"
+                        border="0" data-original-height="530" data-original-width="800"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNtqh4nilgStcltKi8IES_CY5zO4nuavsamJ9XljKPREoG46hyphenhyphenKbzp_DftFFK0Va4xTYafVSXyLm53h-he63wNST2-J8WOh4Z5GHgc8mdABSi7Rb5uwxcS7b_DFtuGhcsy1scRhIZdspM/d/voronoi_collage_video.gif"
+                        title="Interactive Voronoi Collage Illustration" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive Voronoi Collage Illustration<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/interactive-voronoi/voronoi-collage.py"
+        target="_blank">code</a> for interactive Voronoi Collage:</div>
+<div><br /></div>
+<div><span style="background-color: yellow; text-align: center;">Click on ▶ to run the interactive example.</span></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/9d4b8e86a0?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<h2 id="summary" style="text-align: left;">Summary</h2>
+<div>In summary, creating Voronoi shapes interactively is a lot of fun. &nbsp;There are also some nice applications that
+    we could build in the future (Voronoi patterns / art, Voronoi Collage, etc) based on such interactivity.</div>
+<div><br /></div>
+<div>All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/interactive-voronoi/" target="_blank">GitHub</a>.</div>
+<div><br /></div>
+<div>- Pardhav Maradani</div>

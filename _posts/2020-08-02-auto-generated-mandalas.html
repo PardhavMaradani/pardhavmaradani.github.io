@@ -1,0 +1,176 @@
+---
+layout: post
+title: Auto Generated Mandalas
+date: '2020-08-02T17:51:00.006+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T11:32:57.468+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigBRBmQ7QrsTcAwTWeWwrB_ae7k9iDQl_IY_VbG3uq7WOspQ_EtqGAOp-99ByVdIEXxuVzibLeXov8YZVpHB7BsKvdg0pOL_qlQiQnr5GhOJ-sHyi1E5dCu7bCc6r6yDynbeeHjD7xLK0/s72-c-d/Auto_Generated_Mandalas.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-5644899004981166042
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/08/auto-generated-mandalas.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigBRBmQ7QrsTcAwTWeWwrB_ae7k9iDQl_IY_VbG3uq7WOspQ_EtqGAOp-99ByVdIEXxuVzibLeXov8YZVpHB7BsKvdg0pOL_qlQiQnr5GhOJ-sHyi1E5dCu7bCc6r6yDynbeeHjD7xLK0/s1200/Auto_Generated_Mandalas.jpg
+category: Python Turtle Graphics
+---
+
+<!--div style="text-align: center;"><a
+        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigBRBmQ7QrsTcAwTWeWwrB_ae7k9iDQl_IY_VbG3uq7WOspQ_EtqGAOp-99ByVdIEXxuVzibLeXov8YZVpHB7BsKvdg0pOL_qlQiQnr5GhOJ-sHyi1E5dCu7bCc6r6yDynbeeHjD7xLK0/s1200/Auto_Generated_Mandalas.jpg"><img
+            alt="Auto Generated Mandalas" border="0" data-original-height="600" data-original-width="1200"
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEigBRBmQ7QrsTcAwTWeWwrB_ae7k9iDQl_IY_VbG3uq7WOspQ_EtqGAOp-99ByVdIEXxuVzibLeXov8YZVpHB7BsKvdg0pOL_qlQiQnr5GhOJ-sHyi1E5dCu7bCc6r6yDynbeeHjD7xLK0/d/Auto_Generated_Mandalas.jpg"
+            title="Auto Generated Mandalas" /></a></div>
+<div><br /></div-->
+<div>In the previous post on <a href="{{ site.baseurl }}{% post_url 2020-07-25-interactive-mandalas %}"
+        target="_blank">Interactive Mandalas</a>, we could easily draw beautiful Mandalas with simple strokes across the
+    screen.&nbsp; Given that even simple strokes generated beautiful patterns, I wondered if we could auto generate them
+    without us manually drawing the same.</div><span><a name='more'></a></span>
+<div><br /></div>
+<div>In this process, I learnt about Random Walks, Noise, etc.&nbsp; The <a
+        href="https://natureofcode.com/book/introduction/" target="_blank">introduction</a> to Nature of Code by Daniel
+    Shiffman has a great amount of detail about these concepts.&nbsp; I learnt about Perlin Noise and saw how it could
+    be very useful in auto generating our Mandalas.</div>
+<h2 id="random-walker" style="text-align: left;">Random Walker</h2>
+<div>I started off with the same code we used in the previous post to create Mandalas and extended it.&nbsp; I began
+    with a simple Random Walker to see what patterns I would get.</div>
+<div><br /></div>
+<div>The Random Walker starts off randomly on the screen and moves a certain number of steps.&nbsp; The number of steps
+    and the magnitude of each step can be controlled via sliders.&nbsp; Similar to how we created Mandalas previously,
+    we only need to generate one path, which gets mirrored / replicated across the sectors.</div>
+<div><br /></div>
+<div>Here are some examples of Mandalas generated with the Random Walker:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguioKoWRPqBClaLXJJwmMv3_Z-UtUFfp1ekYOLZo4pQ-4R95FR4mflfTTMhNTQRjybMEsLjkrLlpNefRv-W_yTkbtn2isHE9nmg_gMBfNnrIleaOR1qL_f909bj5OKuRU5dV25T5-NM5s/s1438/random_walker_mandala.png"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Examples of Random Walker Mandalas"
+                        border="0" data-original-height="960" data-original-width="1438"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguioKoWRPqBClaLXJJwmMv3_Z-UtUFfp1ekYOLZo4pQ-4R95FR4mflfTTMhNTQRjybMEsLjkrLlpNefRv-W_yTkbtn2isHE9nmg_gMBfNnrIleaOR1qL_f909bj5OKuRU5dV25T5-NM5s/d/random_walker_mandala.png"
+                        title="Examples of Random Walker Mandalas" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Examples of Random Walker Mandalas<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/auto-generated-mandalas/random-walker.py"
+        target="_blank">code</a> for auto generated Mandalas with the Random Walker:</div>
+<div><br /></div>
+<div>
+    <div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code
+            samples in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+            style="background-color: yellow;" target="_blank">trinket</a><span
+            style="background-color: yellow;">).&nbsp;</span></div>
+    <div><br /></div>
+    <div><span style="background-color: yellow; text-align: center;">Click on ▶ to&nbsp;see auto generated Mandalas in
+            action:</span></div>
+</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/8dffbb47db?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div><br /></div>
+<h2 id="perlin-noise-walker" style="text-align: left;">Perlin Noise Walker</h2>
+<div>Even though we get interesting patterns with random walk paths, they seemed a bit unnatural.&nbsp; I wanted some
+    smooth curves as the paths.&nbsp; This is where we could use Perlin Noise to generate these paths.</div>
+<div><br /></div>
+<div>I looked for code that generates Perlin Noise in Python and found <a
+        href="https://rosettacode.org/wiki/Perlin_noise#Python" target="_blank">this</a> and <a
+        href="https://github.com/caseman/noise/blob/master/perlin.py" target="_blank">this</a>.&nbsp; The former is 3D
+    noise, where as the later has a 2D equivalent and supports randomization as well.&nbsp; I chose the later due to
+    this.&nbsp; I then created a simple PerlinWalker Class based on some examples I've seen in Processing/P5.js samples
+    and created sliders to control the variables. (Please see the 'PerlinWalker' Class in main.py in the code below)
+</div>
+<div><br /></div>
+<div>
+    <div>Here are some examples of Mandalas generated with the Perlin Walker:</div>
+</div>
+<div><br /></div>
+<div>(the path generated by the Perlin Walker is shown in 'red' in some examples below)</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4FmNZiXrmGEk43VZme9G9jZpb8XVzhDvq4woOi5vLVr2j2-xJVnHAR5CD5Sdrd8Wt5_ge28sgNKW6T1FZ6cOaNc-dzfDBoY4RN8LgjPDSxvBW-hccwrx0b6bLR_45bH-s_LYm8MuTLOg/s1438/perlin_walker_mandalas.png"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Examples of Perlin Walker Mandalas"
+                        border="0" data-original-height="960" data-original-width="1438"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4FmNZiXrmGEk43VZme9G9jZpb8XVzhDvq4woOi5vLVr2j2-xJVnHAR5CD5Sdrd8Wt5_ge28sgNKW6T1FZ6cOaNc-dzfDBoY4RN8LgjPDSxvBW-hccwrx0b6bLR_45bH-s_LYm8MuTLOg/d/perlin_walker_mandalas.png"
+                        title="Examples of Perlin Walker Mandalas" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Examples of Perlin Walker Mandalas<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div><br /></div>
+<div>Here is the <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/auto-generated-mandalas/perlin-noise-walker.py"
+        target="_blank">code</a> for auto generated Mandalas with the Perlin Noise Walker:</div>
+<div><br /></div>
+<div>
+    <div><span style="background-color: yellow; text-align: center;">Click on ▶ to&nbsp;see auto generated Mandalas in
+            action:</span></div>
+    <div><br /></div>
+</div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/63e95daeca?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div><br /></div>
+<h2 id="perlin-noise-walker-circular" style="text-align: left;">Perlin Noise Walker - Circular</h2>
+<div>The paths created above by the Perlin Noise Walker are open ended.&nbsp; I wanted to see how they would look if we
+    closed them.&nbsp; For this, I created points along a circle with the y-coordinate varying based on the Perlin
+    Noise.&nbsp; These look a lot like patterns created using a <a href="https://en.wikipedia.org/wiki/Spirograph"
+        target="_blank">Spirograph</a>. (I used to have one of this and would like to create these patterns too in a
+    future post)</div>
+<div><br /></div>
+<div>Similar to the previous section, I added sliders to control the various params used for this.</div>
+<div><br /></div>
+<div>
+    <div>Here are some examples of Mandalas generated with the Perlin Walker - Circular:</div>
+</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyrKjL0uGrVsPjjr7fkS8DQ-Wxf1lVuoqeYYEknPWOcJhH-yYwm8bFOtbF2LdHM2XV1P5wPnQfDziqAlwGdDaCZT5cZfY2e_Vc2lhTH_U3t7h7FXRkJb34NSrIee05cuJkobYT0PFWxGg/s1438/perlin_walker_circular_mandalas.png"
+                    style="margin-left: auto; margin-right: auto;"><img
+                        alt="Examples of Circular Perlin Walker Mandalas" border="0" data-original-height="960"
+                        data-original-width="1438"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiyrKjL0uGrVsPjjr7fkS8DQ-Wxf1lVuoqeYYEknPWOcJhH-yYwm8bFOtbF2LdHM2XV1P5wPnQfDziqAlwGdDaCZT5cZfY2e_Vc2lhTH_U3t7h7FXRkJb34NSrIee05cuJkobYT0PFWxGg/d/perlin_walker_circular_mandalas.png"
+                        title="Examples of Circular Perlin Walker Mandalas" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Examples of Circular Perlin Walker Mandalas<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/auto-generated-mandalas/perlin-noise-walker-circular.py"
+        target="_blank">code</a> for auto generated Mandalas with the Perlin Walker - Circular:</div>
+<div>
+    <div><span style="background-color: yellow; text-align: center;"><br /></span></div>
+    <div><span style="background-color: yellow; text-align: center;">Click on ▶ to&nbsp;see auto generated Mandalas in
+            action:</span></div>
+</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/53254a5f55?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+<div><br /></div>
+<h2 id="summary" style="text-align: left;">Summary</h2>
+<div>In summary, Perlin Noise is very interesting and is useful for creating natural looking strokes / paths.&nbsp; It
+    would be very interesting to try and replace straight lines from some of our previous posts with natural looking
+    lines to see how they'd look.&nbsp; I'll explore these in a future post.</div>
+<div><br /></div>
+<div>All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/auto-generated-mandalas/" target="_blank">GitHub</a>.
+</div>
+<div><br /></div>
+<div>- Pardhav Maradani</div>
