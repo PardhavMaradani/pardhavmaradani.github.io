@@ -1,0 +1,471 @@
+---
+layout: post
+title: Polygons in Polygons
+date: '2020-05-31T12:44:00.013+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T13:17:46.177+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzKKFySKaO9ik0P6qVkJxhyZ3WEXl2idRhBfS4yegqop9S4zIkWU-L0Yo82QvQNljDaO9vfVZhXmx4rbhkIocd7rWuRhY7W13_zPo3Nviky-onYGu9BWN8gshGHZN247Mm3xhax1C0h5g/s72-c/tiling3.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-3562380001576706964
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/05/polygons-in-polygons.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzKKFySKaO9ik0P6qVkJxhyZ3WEXl2idRhBfS4yegqop9S4zIkWU-L0Yo82QvQNljDaO9vfVZhXmx4rbhkIocd7rWuRhY7W13_zPo3Nviky-onYGu9BWN8gshGHZN247Mm3xhax1C0h5g/s1600/tiling3.jpg
+category: Python Turtle Graphics
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    <!--div class="separator" style="clear: both; text-align: center;">
+        <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzKKFySKaO9ik0P6qVkJxhyZ3WEXl2idRhBfS4yegqop9S4zIkWU-L0Yo82QvQNljDaO9vfVZhXmx4rbhkIocd7rWuRhY7W13_zPo3Nviky-onYGu9BWN8gshGHZN247Mm3xhax1C0h5g/s1600/tiling3.jpg"
+            style="margin-left: 1em; margin-right: 1em;"><br /><img alt="Polygons in Polygons" border="0"
+                data-original-height="600" data-original-width="1200"
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzKKFySKaO9ik0P6qVkJxhyZ3WEXl2idRhBfS4yegqop9S4zIkWU-L0Yo82QvQNljDaO9vfVZhXmx4rbhkIocd7rWuRhY7W13_zPo3Nviky-onYGu9BWN8gshGHZN247Mm3xhax1C0h5g/s1600/tiling3.jpg"
+                title="Polygons in Polygons" /></a>
+    </div-->
+    <h2 id="simple-spirals" style="text-align: left;">Simple spirals</h2>
+    While playing with Python Turtle, I came across drawing simple spirals with polygons rotating within themselves.
+    &nbsp;I liked how we could get so many patterns by making small changes to the code.
+</div><span><a name='more'></a></span>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />
+    Here is an example of such spirals:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEiCp-9kl7ZemKbUVxNYSdcfTm148I78YReGE7bMw7RRKBjbAcoyAsLUY6ocD5dJfEqJWKQVv-Q4CBHz8VADo5KTY5Dfpjor-cI8wKnQowptTjx0FcENDKhbeSlk_V39gZ8oNvlIHB2iw/s1600/simple-spirals.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Simple spirals" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEiCp-9kl7ZemKbUVxNYSdcfTm148I78YReGE7bMw7RRKBjbAcoyAsLUY6ocD5dJfEqJWKQVv-Q4CBHz8VADo5KTY5Dfpjor-cI8wKnQowptTjx0FcENDKhbeSlk_V39gZ8oNvlIHB2iw/s1600/simple-spirals.jpg"
+                            title="Simple spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Simple spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/simple-spirals.py"
+        target="_blank">code</a> to draw the spirals shown above:<br />
+    <br />
+    <span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples in
+        this post and try them out (thanks to <a href="https://trinket.io/" target="_blank">trinket</a>).</span><br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/59ccb77216?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;
+</div>
+<h2 id="expected-shapes" style="text-align: left;">Expected shapes</h2>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    Though I liked the output of this code, it seemed a bit irregular. &nbsp;I wanted to see the polygons rotating
+    inside one another in a regular pattern with the vertices touching the edges of the outer polygon.<br />
+    <br />
+    Here is an example of what I wanted to see:<br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKjVi4a3AU517rNjE6Leghb6xpL7nmgydMTjc8v6B6LVAQVZJtuwZo-McftxTi6cY92uiyx1IflYwZq-a5YSd2UYe_6r5hZZQM5ex0o6cVEL5zLH0gj-qwii_95o55IsjBNOsQrBU9NF0/s1600/expected-shapes.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Expected shapes" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKjVi4a3AU517rNjE6Leghb6xpL7nmgydMTjc8v6B6LVAQVZJtuwZo-McftxTi6cY92uiyx1IflYwZq-a5YSd2UYe_6r5hZZQM5ex0o6cVEL5zLH0gj-qwii_95o55IsjBNOsQrBU9NF0/s1600/expected-shapes.jpg"
+                            title="Expected shapes" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Expected shapes</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 id="simple-polygons" style="text-align: left;">Simple polygons</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    The above image shows that we can rotate the shapes around a given centre point. &nbsp;So, I wanted to first draw
+    regular polygons around a given centre point. &nbsp;To do that, I had to calculate the starting point (sx, sy in
+    image below) to draw the polygon using Turtle. &nbsp;I used the following <a
+        href="https://www.mathsisfun.com/geometry/regular-polygons.html" rel="" target="_blank">link</a> to calculate
+    this. &nbsp;As shown in the link, I had to calculate the 'radius' and angle 'a' for a polygon first as shown in the
+    image below.<br />
+    <br />
+    <div class="separator" style="clear: both; text-align: center;">
+    </div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7JOjGbL9gcRFCqUv3wvB5DZx4fgdM3YtQDbfqGjqh4AsJrKkxB0eB2iSrTFeq7PlwWkeuiZwqB4gO3AlzLcqCLxRD774OWHnkJA5rHZNiBjVTHzE_-2LkzJuqJ195AfAKHAXifff_ffY/s1600/simple-polygons-method.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Method to get starting point"
+                            border="0" data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7JOjGbL9gcRFCqUv3wvB5DZx4fgdM3YtQDbfqGjqh4AsJrKkxB0eB2iSrTFeq7PlwWkeuiZwqB4gO3AlzLcqCLxRD774OWHnkJA5rHZNiBjVTHzE_-2LkzJuqJ195AfAKHAXifff_ffY/s1600/simple-polygons-method.jpg"
+                            title="Method to get starting point" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Method to get starting point</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the output of the simple polygons drawn around the given centres:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRPBc-dTCKPAaS14Fv0vfE0_y9JFcPmpdXdmwIvAGrCCpO1JK4FUAFJTmOJSpNeevSjd20be2OzQzxXwMSmY7UBcWKEOJ1u6BvE5-OGb5K8Rvrtnzf2XY2xSw_ceE8tYA4tTYw_KKSklc/s1600/simple-polygons.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Simple polygons" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRPBc-dTCKPAaS14Fv0vfE0_y9JFcPmpdXdmwIvAGrCCpO1JK4FUAFJTmOJSpNeevSjd20be2OzQzxXwMSmY7UBcWKEOJ1u6BvE5-OGb5K8Rvrtnzf2XY2xSw_ceE8tYA4tTYw_KKSklc/s1600/simple-polygons.jpg"
+                            title="Simple polygons" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Simple polygons</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/simple-polygons.py"
+        target="_blank">code</a> to draw the simple polygons shown above:<br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/299184db6e?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;<h2 id="polygon-spirals" style="text-align: left;">Polygon spirals</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    Now that we have a regular polygon, I wanted to rotate it around the same centre and create the spirals shown
+    before. &nbsp;To do that, I had to first calculate the rotated starting point (rsx, rsy &nbsp;shown in image below)
+    and the angle 'a' to know where to start the Turtle and with what angle to draw the new polygon. &nbsp;I used the
+    reference from this <a href="https://stackoverflow.com/questions/2259476/rotating-a-point-about-another-point-2d"
+        rel="" target="_blank">link</a> to do this.<br />
+    <br />
+    <div class="separator" style="clear: both; text-align: center;">
+    </div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTn6_CDm4cNoC2-Y99FJBiTS3V67yOqydLNhfQeu2ZYK9KnCXGRAC6C0Ex4-n_s6isTE5PvHU-bFTZDhLLaVN6mLzfRqXuyHOpnNf-YhsMvP2oVNmND53ESrYkBP1DZtpuVxUFkeTeDtQ/s1600/polygon_rotation.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Method to get rotated starting point"
+                            border="0" data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTn6_CDm4cNoC2-Y99FJBiTS3V67yOqydLNhfQeu2ZYK9KnCXGRAC6C0Ex4-n_s6isTE5PvHU-bFTZDhLLaVN6mLzfRqXuyHOpnNf-YhsMvP2oVNmND53ESrYkBP1DZtpuVxUFkeTeDtQ/s1600/polygon_rotation.jpg"
+                            title="Method to get rotated starting point" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Method to get rotated starting point</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Then, I had to reduce the length of the polygon side as it rotates inside. &nbsp;The new length has to be such that
+    the rotated polygon fits perfectly in the previous polygon. &nbsp;The angle by which the polygons rotate inside is
+    constant. &nbsp;The length of the rotating polygons reduce by a fixed factor every time.<br />
+    <br />
+    Here is the output that I got after doing this:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYpWXZh2DhrO_t0XybsC0S_coKzHpm4zpLcEBdfMFHL4u-N_VeAkSsAPN-4YurbLpi6TTNv5WMLnq9CbNUEIq_ie9UlFOSaUB1XUs7shxPv3og5ma0rT5oF2qcynTump9hfG05H-Jae38/s1600/shape-spirals.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Polygon spirals" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYpWXZh2DhrO_t0XybsC0S_coKzHpm4zpLcEBdfMFHL4u-N_VeAkSsAPN-4YurbLpi6TTNv5WMLnq9CbNUEIq_ie9UlFOSaUB1XUs7shxPv3og5ma0rT5oF2qcynTump9hfG05H-Jae38/s1600/shape-spirals.jpg"
+                            title="Polygon spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Polygon spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/polygon-spirals.py">code</a> for
+    the polygon spirals shown above:<br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/e4abbd5e22?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+    <br />
+    <br />
+    Here is how these polygon spirals look when filled alternatively:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgioQfHM2i3ER_NEj84_bzA7lmgsDrVfEZtOPGytYEnd1FnvQCrdSqQJdoPGkf2cAr9V2KZJhvO1PB9Gba0OVz1W5DeEIOdzHCH7bSg0Ih7Zn4SZwb4JtFiy2eQctRV2nAbJ31p9CzJQSk/s1600/Whirl+-+cb+-++patterns.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Filled polygon spirals" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgioQfHM2i3ER_NEj84_bzA7lmgsDrVfEZtOPGytYEnd1FnvQCrdSqQJdoPGkf2cAr9V2KZJhvO1PB9Gba0OVz1W5DeEIOdzHCH7bSg0Ih7Zn4SZwb4JtFiy2eQctRV2nAbJ31p9CzJQSk/s1600/Whirl+-+cb+-++patterns.jpg"
+                            title="Filled polygon spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Filled polygon spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    I then tried to rotate the polygons in the opposite direction and also draw the base polygon at different angles
+    with respect to the x-axis.<br />
+    <br />
+    Here is an example output of a triangle spiral. &nbsp;The second spiral is in the opposite direction to the first.
+    &nbsp;The third one is rotated 180 degrees from x-axis. &nbsp;See image below:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDMjmZa1xVSupaAuEso1B9XFfs_ApnvJwWqAIBLDMvViam-uGfyqsJDKnyHvTE4zDyxgLQcndB7Uwifi6VxVvDeqbJtray5ABT4nlnX8SGtC-1jum3JLMs0r0f8-DII5zPHPe6rCKYvZw/s1600/rotated-spirals.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Reversed and rotated spirals"
+                            border="0" data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDMjmZa1xVSupaAuEso1B9XFfs_ApnvJwWqAIBLDMvViam-uGfyqsJDKnyHvTE4zDyxgLQcndB7Uwifi6VxVvDeqbJtray5ABT4nlnX8SGtC-1jum3JLMs0r0f8-DII5zPHPe6rCKYvZw/s1600/rotated-spirals.jpg"
+                            title="Reversed and rotated spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Reversed and rotated spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/rotated-spirals.py"
+        target="_blank">code</a> for the reversed and rotated spirals shown above:<br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0"
+            marginwidth="0" src="https://trinket.io/embed/python/b58cedd754?toggleCode=true&amp;runOption=run"
+            width="100%"></iframe>&nbsp;&nbsp;
+    <h2 id="tiles" style="text-align: left;">Tiles</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    Now that I am able to draw regular polygon spirals with any number of sides any where on the screen in any direction
+    with any starting angle with respect to x-axis, I wanted try and see if there are interesting patterns when they are
+    tiled in some regular fashion.<br />
+    <br />
+    Here is how I thought we could put some polygon spirals to create some basic tiles:<br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb4zeIrvHa9uU1JjaOgC5ABk1LAvggzxFoqjQpUw1yhNanMCvLOdjhTrnEJvbrvL4dqV5a_EU7i1B5AKo_rTpDtaaeTbdf99N-sv5szxQ8XySHQTR2EoryYCX19caarFKOaZGymRVvbRI/s1600/tiles_method.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Tiles from individual spirals"
+                            border="0" data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb4zeIrvHa9uU1JjaOgC5ABk1LAvggzxFoqjQpUw1yhNanMCvLOdjhTrnEJvbrvL4dqV5a_EU7i1B5AKo_rTpDtaaeTbdf99N-sv5szxQ8XySHQTR2EoryYCX19caarFKOaZGymRVvbRI/s1600/tiles_method.jpg"
+                            title="Tiles from individual spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Tiles from individual spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    I created some simple patterns based on the rotated angle and direction of the spirals.<br />
+    <br />
+    Here is the output of a few tiles. &nbsp;The first two are from individual triangle spirals and the next two are
+    from individual square spirals. &nbsp;See image below:<br />
+    <br />
+    <div class="separator" style="clear: both; text-align: center;">
+    </div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7GLjUYKOAiFH5T0MDs2V-CRclPsxLumwzvXbolw7eaJR_YtU5_qlewkjmQEPpZsi_oGshgO5JBzyY3pWy8wLDlbuRBbS5-mGhn_B_X_H8YHCwfSe2L03bNicSCL9BoJiCS01r3cKp800/s1600/tiles.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Tiles" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7GLjUYKOAiFH5T0MDs2V-CRclPsxLumwzvXbolw7eaJR_YtU5_qlewkjmQEPpZsi_oGshgO5JBzyY3pWy8wLDlbuRBbS5-mGhn_B_X_H8YHCwfSe2L03bNicSCL9BoJiCS01r3cKp800/s1600/tiles.jpg"
+                            title="Tiles" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Tiles</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/tiles.py"
+        target="_blank">code</a> for the tiles shown above:<br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/e5216f4c89?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+    <br />
+    <br />
+    Here is how these tiles look when filled alternatively:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjf3FVONElyheamGvzpD4ZC76rmqNOwDuRjPjcghYz4VqCqLqDPK1GSzT3nYEKS-qyJApfu54fI1z3iGcv6BTDr-rIeeLMrzBEPSwtyVW97MlHnunU8Qrf4hx2rPwgx9K7WrpYXwUrlY4k/s1600/whirl+-+cb+-+tile.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Filled tiles" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjf3FVONElyheamGvzpD4ZC76rmqNOwDuRjPjcghYz4VqCqLqDPK1GSzT3nYEKS-qyJApfu54fI1z3iGcv6BTDr-rIeeLMrzBEPSwtyVW97MlHnunU8Qrf4hx2rPwgx9K7WrpYXwUrlY4k/s1600/whirl+-+cb+-+tile.jpg"
+                            title="Filled tiles" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Filled tiles</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is an example of a partial hexagon tiling comprised of other smaller hexagon spirals:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl-Ivvv9Ha0idhLFiQFwfVwxbSJHjvXkZf-GxRCI3tM_-PeRndAp9eF3AGPU5FwuBRlQNvqIwlraypMUel0jTfHbFso0xEEgkuEazhKZYKem0aYGDYNED8J16rvYCGevxxz_X24faf3Ik/s1600/hexagons_tile.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="A partial tiling with hexagon spirals"
+                            border="0" data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl-Ivvv9Ha0idhLFiQFwfVwxbSJHjvXkZf-GxRCI3tM_-PeRndAp9eF3AGPU5FwuBRlQNvqIwlraypMUel0jTfHbFso0xEEgkuEazhKZYKem0aYGDYNED8J16rvYCGevxxz_X24faf3Ik/s1600/hexagons_tile.jpg"
+                            title="A partial tiling with hexagon spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">A partial tiling with hexagon spirals</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 id="tilings" style="text-align: left;">Tilings</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">Now that we have interesting tiles, I wanted to see how it looked
+    if we tiled the entire screen with these.<br />
+    <br />
+    Here are some sample outputs of such tilings I could get:<br />
+    <br />
+    <div class="separator" style="clear: both; text-align: center;">
+    </div>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4XdrXvumQECe4l1Uu6ymK4VdO01Jbft-w2ivi6hrxVYFPQMOvUtiyhIGlZ61a-0vHi9-bZRij1h4f9MnR7NCrK8Wz_eLSu2roVln5XlxdCvRKPRYEq35LQ352xrsagXY6M-zO6IcBx_0/s1600/tiling4.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="A tiling with triangle spirals"
+                            border="0" data-original-height="600" data-original-width="1200"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4XdrXvumQECe4l1Uu6ymK4VdO01Jbft-w2ivi6hrxVYFPQMOvUtiyhIGlZ61a-0vHi9-bZRij1h4f9MnR7NCrK8Wz_eLSu2roVln5XlxdCvRKPRYEq35LQ352xrsagXY6M-zO6IcBx_0/s1600/tiling4.jpg"
+                            title="A tiling with triangle spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">
+                    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                        style="margin-left: auto; margin-right: auto; text-align: center;">
+                        <tbody>
+                            <tr>
+                                <td class="tr-caption" style="font-size: 12.8px;">A tiling with triangle spirals</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFZ-0YyctD_MwcysVJdgljullZjdAewPSvgdve5vGVCRb8AJcN-dziVDsJ1w51W6oSOnFXjn4xUb6KzSRlIG7aZ97U6rx_KcA1-2BU1jtte8GMjIHbpzRuk1aH2pHcpJhMUnJXjOSaPFA/s1600/tiling2.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="A tiling with square spirals"
+                            border="0" data-original-height="600" data-original-width="1200"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFZ-0YyctD_MwcysVJdgljullZjdAewPSvgdve5vGVCRb8AJcN-dziVDsJ1w51W6oSOnFXjn4xUb6KzSRlIG7aZ97U6rx_KcA1-2BU1jtte8GMjIHbpzRuk1aH2pHcpJhMUnJXjOSaPFA/s1600/tiling2.jpg"
+                            title="A tiling with square spirals" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">
+                    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                        style="margin-left: auto; margin-right: auto; text-align: center;">
+                        <tbody>
+                            <tr>
+                                <td class="tr-caption" style="font-size: 12.8px;">A tiling with square spirals</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/tiling.py"
+        target="_blank">code</a> for the tilings shown above and the image at the very top of this post:<br />
+    <br />
+    (You can comment/uncomment the last few lines to try these out)<br />
+    <br />
+    <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/5fc3d7628d?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+    <br />
+    <br />
+    Here is how these tilings look when filled alternatively:<br />
+    <br />
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisNZIgyYkGS7qnTU1T6_UGhPUxNC14dGFKdW-I-BSMNdV-I4DRpVHDltbqn8Sc3Mugj6kgqsyY7zdUfL5tdV6KiYoK36mWl2b03AavNRrEbZVEF5SnVhgFc46cdgxARcfQ6mg1ezsPlZk/s1600/whirl_cb_tiling_1.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="A filled tiling" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisNZIgyYkGS7qnTU1T6_UGhPUxNC14dGFKdW-I-BSMNdV-I4DRpVHDltbqn8Sc3Mugj6kgqsyY7zdUfL5tdV6KiYoK36mWl2b03AavNRrEbZVEF5SnVhgFc46cdgxARcfQ6mg1ezsPlZk/s1600/whirl_cb_tiling_1.jpg"
+                            title="A filled tiling" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">A filled tiling</td>
+            </tr>
+        </tbody>
+    </table>
+    <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+        style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><a
+                        href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZkzkTbGc63SLy3NzRhcXCTk4zBIKPIlURb6TtQWwdUB7kwg1lhBH_uKCKwC39yXpg8v4xMot66zf8vDvh1RiWbAuEZ-Gfr-O4XmZwJRj48YHHrDMdy1O7drSMHyOGVBlcExakfA7YRXY/s1600/whirl_cb_tiling_2.jpg"
+                        style="margin-left: auto; margin-right: auto;"><img alt="Another filled tiling" border="0"
+                            data-original-height="400" data-original-width="800"
+                            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZkzkTbGc63SLy3NzRhcXCTk4zBIKPIlURb6TtQWwdUB7kwg1lhBH_uKCKwC39yXpg8v4xMot66zf8vDvh1RiWbAuEZ-Gfr-O4XmZwJRj48YHHrDMdy1O7drSMHyOGVBlcExakfA7YRXY/s1600/whirl_cb_tiling_2.jpg"
+                            title="Another filled tiling" /></a></td>
+            </tr>
+            <tr>
+                <td class="tr-caption" style="text-align: center;">Another filled tiling</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h2 id="summary" style="text-align: left;">Summary</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    In summary, polygons in polygons create very interesting spirals and shapes.</div>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br /></div>
+<div dir="ltr" style="text-align: left;" trbidi="on">All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/polygons-in-polygons/" target="_blank">GitHub</a>.<br />
+    <h2 id="updates" style="text-align: left;">
+        Updates:</h2>
+    7 June 2020<br />
+    <ol style="text-align: left;">
+        <li>I learnt that these rotating polygons in polygons are also called as <a
+                href="https://mathworld.wolfram.com/Whirl.html" target="_blank">Whirls</a>. &nbsp;I also learnt that the
+            vertices follow a path as described in the <a href="https://mathworld.wolfram.com/MiceProblem.html"
+                target="_blank">mice problem</a>. &nbsp;This is probably why these are also called as <a
+                href="https://www.google.co.in/search?q=pursuit+polygons" target="_blank">pursuit polygons</a> as the
+            vertices move in pursuit of each other.</li>
+        <li>Added alternatively filled images</li>
+    </ol>
+    5 July 2020
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    <ol style="text-align: left;">
+        <li>An interactive version of Polygon Whirls can be found in this later <a
+                href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}" target="_blank">post</a>.</li>
+    </ol>
+    <div>- Pardhav Maradani</div>
+</div>

@@ -1,0 +1,339 @@
+---
+layout: post
+title: Sliders
+date: '2020-07-05T17:16:00.011+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T11:34:21.712+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYJ39d6_oprvSUlNUiMkmrmFuiGVNQEWex8-boLYUwbTcvUnWdGIsyt-zpHR-OjwG9-STac-ZY5NRDomY1gpdLbyvEBrP2YOi0AitEC3sGP8Xo1E_63s3QZwQnWDFq_vPclvnUueCRzNo/s72-c-d/sliders.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-7453385913844516573
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/07/sliders.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYJ39d6_oprvSUlNUiMkmrmFuiGVNQEWex8-boLYUwbTcvUnWdGIsyt-zpHR-OjwG9-STac-ZY5NRDomY1gpdLbyvEBrP2YOi0AitEC3sGP8Xo1E_63s3QZwQnWDFq_vPclvnUueCRzNo/s1200/sliders.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYJ39d6_oprvSUlNUiMkmrmFuiGVNQEWex8-boLYUwbTcvUnWdGIsyt-zpHR-OjwG9-STac-ZY5NRDomY1gpdLbyvEBrP2YOi0AitEC3sGP8Xo1E_63s3QZwQnWDFq_vPclvnUueCRzNo/s1200/sliders.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="600"
+                        data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYJ39d6_oprvSUlNUiMkmrmFuiGVNQEWex8-boLYUwbTcvUnWdGIsyt-zpHR-OjwG9-STac-ZY5NRDomY1gpdLbyvEBrP2YOi0AitEC3sGP8Xo1E_63s3QZwQnWDFq_vPclvnUueCRzNo/d/sliders.jpg" /></a>
+            </td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table-->
+<div>In a previous post on <a href="{{ site.baseurl }}{% post_url 2020-06-21-polygon-stacks %}" target="_blank">Polygon
+        Stacks</a>, I wanted to use sliders similar to <a href="https://observablehq.com/@mbostock/spiral-stack"
+        target="_blank">Spiral Stack</a> to make them interactive. &nbsp;However, at that point, I did not know how to
+    create such sliders in Python Turtle.</div>
+<div><br /></div>
+<div>While working on the previous post on <a href="{{ site.baseurl }}{% post_url 2020-06-28-bezier-curve-animations %}"
+        target="_blank">Bézier Curve Animations</a>, I learnt how to click and drag control points (which are individual
+    Turtles) across the screen. &nbsp;I thought we could use the same principle to implement sliders. &nbsp;In this
+    post, I describe how I implemented the basic slider in Python Turtle and applied it to some examples in my previous
+    posts to make them interactive.</div><span><a name='more'></a></span>
+<div><br /></div>
+<h2 id="basic-slider" style="text-align: left;">Basic Slider</h2>
+<div>Similar to the ControlPoint Class in my <a
+        href="{{ site.baseurl }}{% post_url 2020-06-28-bezier-curve-animations %}" target="_blank">Bézier Curve
+        Animations</a> post, I created a new Class called Slider, which extends the basic Turtle. &nbsp;The code is very
+    similar and handles click, release and drag on the Turtle.</div>
+<div><br /></div>
+<div>I added the ability to pass the following values:</div>
+<div>
+    <ul style="text-align: left;">
+        <li>id</li>
+        <ul>
+            <li>This is used to distinguish sliders and gets passed to the callback function (see below)</li>
+        </ul>
+        <li>x</li>
+        <ul>
+            <li>The x coordinate where the slider should be drawn on screen</li>
+        </ul>
+        <li>y</li>
+        <ul>
+            <li>The y coordinate where the slider should be drawn on screen</li>
+        </ul>
+        <li>length</li>
+        <ul>
+            <li>The length of the slider line in pixels</li>
+        </ul>
+        <li>min</li>
+        <ul>
+            <li>The minimum value of the slider</li>
+        </ul>
+        <li>max</li>
+        <ul>
+            <li>The maximum value of the slider</li>
+        </ul>
+        <li>step</li>
+        <ul>
+            <li>The value with which the values step in this slider</li>
+        </ul>
+        <li>initial_value</li>
+        <ul>
+            <li>The initial value that the slider starts with</li>
+        </ul>
+        <li>label</li>
+        <ul>
+            <li>The text label to be shown next to the slider on the screen</li>
+        </ul>
+        <li>callback</li>
+        <ul>
+            <li>The function that gets called when the slider value is updated. &nbsp;The id and new value are passed to
+                this callback function</li>
+        </ul>
+    </ul>
+</div>
+<div>I added some basic checks to make sure the slider 'thumb' doesn't go beyond the slider length. &nbsp;I noticed that
+    the 'onrelease' of Turtle doesn't get called if the mouse pointer is not above the Turtle when it is released.
+    &nbsp;So, I added a small check for this if the mouse pointer wanders away.</div>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/basic-slider.py"
+        target="_blank">code</a> for a basic slider:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code samples
+        in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+        style="background-color: yellow;" target="_blank">trinket</a><span style="background-color: yellow;">).
+        &nbsp;All the code in this post when run is interactive. &nbsp;You can move the sliders (and control points in
+        some) to change the values of variables and see the results immediately.</span></div>
+<div><br /></div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/a46520b84c?toggleCode=true&amp;runOption=run"
+    width="100%"></iframe>&nbsp;&nbsp;<h2 id="bezier-curve-animations" style="text-align: left;">Bézier Curve Animations</h2>
+<div>Now that we have a basic slider, I wanted to apply this to my previous projects to see if I could make them
+    interactive.</div>
+<div><br /></div>
+<div>I started with my most recent post on <a href="{{ site.baseurl }}{% post_url 2020-06-28-bezier-curve-animations %}"
+        target="_blank">Bézier Curve Animations</a>. &nbsp;I created a slider for the 't' value and the number of
+    control points. &nbsp;With this, we can move the 't' slider to see the animation as it varies from 0 to 1. &nbsp;We
+    can add (or delete) more control points through the control points slider. &nbsp;As before, we can click and drag
+    any of the control points as well.</div>
+<div><br /></div>
+<div>Here are some&nbsp;<span style="text-align: center;">interactive examples of Bézier curve animations</span><span
+        style="text-align: center;">:</span></div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9CxAtkOf5Ur1S-OxAcPAlgmmG4GwTN-TE_P-SB88yyGskMXYYy7bS1Yp23QpqDfKTDuWgcctxiwVjCfQPLAOvunruoeurNg12YXQa31z-q4Sw6tHRrWIKNSxF4H_rAFLdFSKP5ktlx_k/s1200/interactive_bezier_curve_animations.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img
+                        alt="Interactive examples of Bézier curve animations" border="0" data-original-height="800"
+                        data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9CxAtkOf5Ur1S-OxAcPAlgmmG4GwTN-TE_P-SB88yyGskMXYYy7bS1Yp23QpqDfKTDuWgcctxiwVjCfQPLAOvunruoeurNg12YXQa31z-q4Sw6tHRrWIKNSxF4H_rAFLdFSKP5ktlx_k/d/interactive_bezier_curve_animations.jpg"
+                        title="Interactive examples of Bézier curve animations" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive examples of Bézier curve animations</td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/bezier-curve-animations.py"
+        target="_blank">code</a><span style="text-align: center;">&nbsp;for interactive Bézier curve animations:</span>
+</div>
+<div><span style="text-align: center;"></span><br /><span style="background-color: yellow;"><span
+            style="text-align: center;"><span style="text-align: center;">Click on ▶ to run the interactive
+                example.</span></span></span></div>
+<div><br /></div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/2572eb9d97?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<div>I also added the same sliders for the Bézier curves in pursuit code to show the relationship more closely.</div>
+<div><br /></div>
+<div>Here are some interactive examples of Bézier curves in pursuit:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHzwLqHgR1vccrWxm2QYlx4V6R4G2xqH1jAF14lJxvOlVJLSSDN-S-ODFbnI1mUHFwtDPJFXkd5_VXAYey9w-MruZD_CcovnpSi99xpR5ZOGZuMBKOLS1Om4sk-VxhYhHvVA19I2ssof0/s1200/interactive_bezier_pursuit_curve_animation.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img
+                        alt="Interactive examples of Bézier curves in pursuit" border="0" data-original-height="800"
+                        data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHzwLqHgR1vccrWxm2QYlx4V6R4G2xqH1jAF14lJxvOlVJLSSDN-S-ODFbnI1mUHFwtDPJFXkd5_VXAYey9w-MruZD_CcovnpSi99xpR5ZOGZuMBKOLS1Om4sk-VxhYhHvVA19I2ssof0/d/interactive_bezier_pursuit_curve_animation.jpg"
+                        title="Interactive examples of Bézier curves in pursuit" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Interactive e<span style="text-align: left;">xamples of
+                    Bézier curves in pursuit</span></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/bezier-curves-in-pursuit.py"
+        target="_blank">code</a> for interactive Bézier curves in pursuit:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;"><span style="text-align: center;"><span style="text-align: center;">Click
+                on ▶ to run the interactive example.</span></span></span></div>
+<div>
+    <div><br /></div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/6a58cb2e48?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;
+</div>
+<h2 id="polygon-stacks" style="text-align: left;">Polygonal Stacks</h2>
+<div><a href="{{ site.baseurl }}{% post_url 2020-06-21-polygon-stacks %}" target="_blank">This</a> was where I really
+    needed sliders as there are quite a few variables that control the output.</div>
+<div><br /></div>
+<div>I added sliders to all of these variables (outer sides, inner sides, inner polygons multiple, gap to center, number
+    of twists, pen size, output size on screen and whether to color alternatively). &nbsp;Note that I used a slider to
+    select True / False for the 'checkerboard' variable too. &nbsp;With this, I can see all variations easily on the
+    screen without having to change variables and re-run the code.</div>
+<div><br /></div>
+<div>Here are some interactive examples of Polygonal Stacks:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg59vNYUOs8atXSp1Eg1cR5ylUq-eLuan-MHeFSQQp4VwQwRyjAHyQP14LFEFaWNdn6tNzYnOZ3lxeCQabbEFbA-8UJKXxJsweR7_nPxTELRd2csSQlE1aMHfFISDGA9R1xCViO6hgMTCg/s1200/interactive_polygon_stacks.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive examples of Polygonal Stacks"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg59vNYUOs8atXSp1Eg1cR5ylUq-eLuan-MHeFSQQp4VwQwRyjAHyQP14LFEFaWNdn6tNzYnOZ3lxeCQabbEFbA-8UJKXxJsweR7_nPxTELRd2csSQlE1aMHfFISDGA9R1xCViO6hgMTCg/d/interactive_polygon_stacks.jpg"
+                        title="Interactive examples of Polygonal Stacks" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">I<span style="text-align: left;">nteractive examples of
+                    Polygonal Stacks</span></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/polygonal-stacks.py"
+        target="_blank">code</a> for interactive Polygonal Stacks:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;"><span style="text-align: center;"><span style="text-align: center;">Click
+                on ▶ to run the interactive example.</span></span></span>
+    <div><br /></div>
+</div>
+<div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/dc8c7ec91b?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;</div>
+<h2 id="circular-stacks" style="text-align: left;">Circular Stacks</h2>
+<div>I added similar sliders for the Circular Stacks code as well.</div>
+<div><br /></div>
+<div><span style="text-align: center;">Here are some i</span>nteractive examples of Circular Stacks</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioSaZUIj8-H_DyoIeQoRlz7vWwrMihFpOj1WIybpy0M8nqa6C9kmuHhQKhjsV1smxHGTj4zxOG-UKTkf8naiPsAtlaWcP-8aDF6zvi1OnaEsXvybzj5R8g6Mjv1oxuFBDih7zcnT0xP3I/s1200/interactive_circular_stacks.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive examples of Circular Stacks"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioSaZUIj8-H_DyoIeQoRlz7vWwrMihFpOj1WIybpy0M8nqa6C9kmuHhQKhjsV1smxHGTj4zxOG-UKTkf8naiPsAtlaWcP-8aDF6zvi1OnaEsXvybzj5R8g6Mjv1oxuFBDih7zcnT0xP3I/d/interactive_circular_stacks.jpg"
+                        title="Interactive examples of Circular Stacks" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">I<span style="text-align: left;">nteractive examples of
+                    Circular Stacks</span></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/circular-stacks.py"
+        target="_blank">code</a> for interactive Circular Stacks:</div>
+<div><br /></div>
+<div><span style="background-color: yellow;"><span style="text-align: center;"><span style="text-align: center;">Click
+                on ▶ to run the interactive example.</span></span></span>
+    <div><br /></div>
+</div>
+<div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/f56dd6d317?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;</div>
+<h2 id="polygonal-checkerboards" style="text-align: left;">Polygonal Checkerboards</h2>
+<div>I applied the same sliders to <a href="{{ site.baseurl }}{% post_url 2020-06-07-checkerboards %}"
+        target="_blank">Polygon Checkerboards</a>.</div>
+<div><br /></div>
+<div><span style="text-align: center;">Here are some i</span>nteractive examples of Polygonal Checkerboards:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiicyWf5poStIvVda_cQrVC-vfGhT5E3TL-_UpZz9wC7w5IweVHUBkNiYBnQ1phl6myW9YSl-Q26djDhoLbI_qEObBmOsDWgyRYYbO_kbibBdLJc9OFPVOmIWo0SWwHqj64GwuhaiL331U/s1200/interactive_checkerboards.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img
+                        alt="Interactive examples of Polygonal Checkerboards" border="0" data-original-height="800"
+                        data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiicyWf5poStIvVda_cQrVC-vfGhT5E3TL-_UpZz9wC7w5IweVHUBkNiYBnQ1phl6myW9YSl-Q26djDhoLbI_qEObBmOsDWgyRYYbO_kbibBdLJc9OFPVOmIWo0SWwHqj64GwuhaiL331U/d/interactive_checkerboards.jpg"
+                        title="Interactive examples of Polygonal Checkerboards" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><span style="text-align: left;">Interactive examples of
+                    Polygonal Checkerboards</span></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/polygonal-checkerboards.py"
+        target="_blank">code</a> for interactive polygonal checkerboards:</div>
+<div>
+    <div><br /></div>
+    <div><span style="background-color: yellow;"><span style="text-align: center;"><span
+                    style="text-align: center;">Click on ▶ to run the interactive example.</span></span></span>
+        <div><br /></div>
+    </div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/4cc6051797?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;
+</div>
+<h2 id="polygon-whirls" style="text-align: left;">Polygon Whirls</h2>
+<div>I mentioned how we could draw Polygon Whirls using the same recursive code to draw Bézier curves in a previous <a
+        href="{{ site.baseurl }}{% post_url 2020-06-28-bezier-curve-animations %}" target="_blank">post</a>. &nbsp;We
+    get similar outputs to what we did in the <a href="{{ site.baseurl }}{% post_url 2020-05-31-polygons-in-polygons %}"
+        target="_blank">Polygons in Polygons</a> post. &nbsp;With sliders and the ability to move the control points, we
+    have a lot more interactivity. &nbsp;We can create arbitrary polygon shapes and corresponding whirls.</div>
+<div><br /></div>
+<div>Here are some interactive examples of Polygon Whirls:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB9YWK4yNq9RKSBEcSPCllRjAJzYcBx_L8_Ow_xPTN8SDzMyKhFn-OA4R_Ew-p6Tee_45CMJ_0YRdzfrv1_oIRj83621WKgEpRZrPsrIZy2Mm6rxK6vS8FWXFY4UUtXMidKeAI1oE_LPw/s1200/interactive_polygon_whirls.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive examples of Polygon Whirls"
+                        border="0" data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiB9YWK4yNq9RKSBEcSPCllRjAJzYcBx_L8_Ow_xPTN8SDzMyKhFn-OA4R_Ew-p6Tee_45CMJ_0YRdzfrv1_oIRj83621WKgEpRZrPsrIZy2Mm6rxK6vS8FWXFY4UUtXMidKeAI1oE_LPw/d/interactive_polygon_whirls.jpg"
+                        title="Interactive examples of Polygon Whirls" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><span style="text-align: left;">Interactive examples of
+                    Polygon Whirls</span></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/sliders/polygon-whirls.py"
+        target="_blank">code</a> for interactive Polygon Whirls:</div>
+<div>
+    <div><br /></div>
+    <div><span style="background-color: yellow;"><span style="text-align: center;"><span
+                    style="text-align: center;">Click on ▶ to run the interactive example.</span></span></span>
+        <div><br /></div>
+    </div><iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+        src="https://trinket.io/embed/python/d62f5a5c93?toggleCode=true&amp;runOption=run"
+        width="100%"></iframe>&nbsp;&nbsp;
+</div>
+<h2 id="summary" style="text-align: left;">Summary</h2>
+<div class="separator" style="clear: both; text-align: left;">In summary, Sliders allow a lot of on screen
+    interactivity. &nbsp;I could revisit my previous projects and make them more interactive, which was a lot of fun.
+</div>
+<div class="separator" style="clear: both; text-align: left;"><br /></div>
+<div class="separator" style="clear: both; text-align: left;">All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/sliders/" target="_blank">GitHub</a>.</div>
+<div class="separator" style="clear: both; text-align: left;"><br /></div>
+<div class="separator" style="clear: both; text-align: left;">- Pardhav Maradani</div>

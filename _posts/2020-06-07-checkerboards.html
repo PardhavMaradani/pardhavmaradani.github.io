@@ -1,0 +1,437 @@
+---
+layout: post
+title: Checkerboards
+date: '2020-06-07T11:59:00.013+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T13:15:03.017+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmssvdWP55uzJXxfOnhIOzr7Qi6M8Z6O8NnjEFr0IgpuM0GCCj8kVwWFNIUP8wL4Fgpg8Yp6ZwnGnElByTXgwpgi3tKV8DngyMp8MixnIwDlSbuD9VDXMq9p_j9h-yaKnWjNQA7IfuUJI/s72-c/checkerboards.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-8462635729744404858
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/06/checkerboards.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmssvdWP55uzJXxfOnhIOzr7Qi6M8Z6O8NnjEFr0IgpuM0GCCj8kVwWFNIUP8wL4Fgpg8Yp6ZwnGnElByTXgwpgi3tKV8DngyMp8MixnIwDlSbuD9VDXMq9p_j9h-yaKnWjNQA7IfuUJI/s1600/checkerboards.jpg
+category: Python Turtle Graphics
+---
+
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    <!--div class="separator" style="clear: both; text-align: center;">
+        <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmssvdWP55uzJXxfOnhIOzr7Qi6M8Z6O8NnjEFr0IgpuM0GCCj8kVwWFNIUP8wL4Fgpg8Yp6ZwnGnElByTXgwpgi3tKV8DngyMp8MixnIwDlSbuD9VDXMq9p_j9h-yaKnWjNQA7IfuUJI/s1600/checkerboards.jpg"
+            style="margin-left: 1em; margin-right: 1em;"><br /><img alt="Checkerboards" border="0"
+                data-original-height="600" data-original-width="1200"
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmssvdWP55uzJXxfOnhIOzr7Qi6M8Z6O8NnjEFr0IgpuM0GCCj8kVwWFNIUP8wL4Fgpg8Yp6ZwnGnElByTXgwpgi3tKV8DngyMp8MixnIwDlSbuD9VDXMq9p_j9h-yaKnWjNQA7IfuUJI/s1600/checkerboards.jpg"
+                title="Checkerboards" /></a>
+    </div>
+    <br /-->
+    <h2 id="rectangular" style="text-align: left;">Rectangular</h2>
+</div>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    I wanted to draw checkerboards in Python Turtle. &nbsp;To get a filled polygon in Turtle, it has to be drawn
+    entirely in one go as a closed shape. &nbsp;The common type of checkerboards are rectangular (or square).
+    &nbsp;These are pretty straightforward to draw.</div><span><a name='more'></a></span>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />
+    Here is an output of a rectangular checkerboard:<br />
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <div class="separator" style="clear: both; text-align: center;">
+        </div>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9eE8JpY5vKVlc8-rAYOGgQZFgM9k5DhrUSuxtcBNX1ZNnOLQk5vsZsFHXk0_qKtF-YlTRjIlxFd8OVVr7RXd13MrrJO_PJNLIHGkrfEzBZ9u9mjgcXAOesQ0L7rSi4ocmlkYWnCxeZGw/s1600/rectangular_checkerboard.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Rectangular checkerboard"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9eE8JpY5vKVlc8-rAYOGgQZFgM9k5DhrUSuxtcBNX1ZNnOLQk5vsZsFHXk0_qKtF-YlTRjIlxFd8OVVr7RXd13MrrJO_PJNLIHGkrfEzBZ9u9mjgcXAOesQ0L7rSi4ocmlkYWnCxeZGw/s1600/rectangular_checkerboard.jpg"
+                                title="Rectangular checkerboard" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">
+                        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                            style="margin-left: auto; margin-right: auto; text-align: center;">
+                            <tbody>
+                                <tr>
+                                    <td class="tr-caption" style="font-size: 12.8px;">Rectangular checkerboard</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <div dir="ltr" style="text-align: left;" trbidi="on">
+            <div style="margin: 0px;">
+                <br />
+                Here is the <a
+                    href="https://github.com/PardhavMaradani/blog/blob/main/checkerboards/rectangular-checkerboards.py"
+                    target="_blank">code</a> to draw the output shown above:
+            </div>
+            <div style="margin: 0px;">
+                <br />
+            </div>
+        </div>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code
+            samples in this post and try them out (thanks to <a href="https://trinket.io/"
+                target="_blank">trinket</a>).</span>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+            src="https://trinket.io/embed/python/bc6a538824?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <h2 id="circular" style="text-align: left;">Circular</h2>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Now that we have a rectangular checkerboard, I wanted to draw circular checkerboards. &nbsp;This involves the
+        use of Turtle's circle method itself (with extent parameter set) to draw individual arcs. &nbsp;Each individual
+        polygon can be considered as a quad with four points. &nbsp;These are calculated and connected using lines and
+        arcs.<br />
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here is an output of a circular checkerboard:</div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzYhdJQJYDCCBsEpGCYXt1Tt8ezG8EBz5RDeBiZUfSkMv42-Vh4oPR9UMKsNOymNHYSxknQQWsgNO62IV2U1ParlJjMEOAidPz5PnxrQi3q-za3LQkOi3aX54ouqQzdr_RXx1XCy6JyRU/s1600/circular_checkerboard.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Circular checkerboard" border="0"
+                                data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzYhdJQJYDCCBsEpGCYXt1Tt8ezG8EBz5RDeBiZUfSkMv42-Vh4oPR9UMKsNOymNHYSxknQQWsgNO62IV2U1ParlJjMEOAidPz5PnxrQi3q-za3LQkOi3aX54ouqQzdr_RXx1XCy6JyRU/s1600/circular_checkerboard.jpg"
+                                title="Circular checkerboard" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Circular checkerboard</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/checkerboards/circular-checkerboards.py"
+            target="_blank">code</a> for the circular checkerboard shown above:</div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+            src="https://trinket.io/embed/python/7effc4d6bc?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+        <br />
+        <br />
+        <h2 id="polygonal" style="text-align: left;">Polygonal</h2>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        After that, I wondered if we could draw checkerboards for any given polygon.<br />
+        <br />
+        This is what I had in mind:<br />
+        <br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5xeViKB-sfwg-S2PUi8W3b0lVv2JoAAcJ_93qtHK-428pDbiKeTTPQ2XADM6BbfqktwCL1GXosWEtMrJbtHv_GUoHiCYAZiVEURjhw7VqI-Wxn3fKIZaCIhdnhAR7-u4vf_fe4gzrdIY/s1600/expected_polygon_checkerboard.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Expected polygon checkerboard"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5xeViKB-sfwg-S2PUi8W3b0lVv2JoAAcJ_93qtHK-428pDbiKeTTPQ2XADM6BbfqktwCL1GXosWEtMrJbtHv_GUoHiCYAZiVEURjhw7VqI-Wxn3fKIZaCIhdnhAR7-u4vf_fe4gzrdIY/s1600/expected_polygon_checkerboard.jpg"
+                                title="Expected polygon checkerboard" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Expected polygon checkerboard</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        This too involves drawing separate quads filled alternatively as with the circular checkerboard. &nbsp;The
+        difference here is that the sides are straight lines instead of curves with a fixed radius. &nbsp;We move the
+        Turtle to calculate these four points and then connect them.<br />
+        <br />
+        Here are some outputs of checkerboards for different polygons:
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2p7VCw_dueIXoWZPdmI6HlsSrL1KbU6FY1Aj1ODN1uIqkpR0DKEx9H6q4z3mrMW48I53Uf8balzubl0Tc2KIc57SvHNDBmDBRzIS0YG_jNuF5pX2QMm9L3WFj-fUC0oImlYLzh_-2AQ/s1600/polygon_checkerboard_3.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Polygon checkerboard - Triangle"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgU2p7VCw_dueIXoWZPdmI6HlsSrL1KbU6FY1Aj1ODN1uIqkpR0DKEx9H6q4z3mrMW48I53Uf8balzubl0Tc2KIc57SvHNDBmDBRzIS0YG_jNuF5pX2QMm9L3WFj-fUC0oImlYLzh_-2AQ/s1600/polygon_checkerboard_3.jpg"
+                                title="Polygon checkerboard - Triangle" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Polygon checkerboard - Triangle</td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaAUNAbQ6bV9Z6379Lo6FLsCYeyXfbPxr7HoaKfEFslnjVug2EeiD33Qr2Aq_2DkQFSW5cjbmCfDdrGY5wID7FT9zjdGjFOxOSXWSIruxJLzePY061pvjoAqIu5rUa1ZCbOvCUYxMboVA/s1600/polygon_checkerboard_4.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Polygon checkerboard - Square"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaAUNAbQ6bV9Z6379Lo6FLsCYeyXfbPxr7HoaKfEFslnjVug2EeiD33Qr2Aq_2DkQFSW5cjbmCfDdrGY5wID7FT9zjdGjFOxOSXWSIruxJLzePY061pvjoAqIu5rUa1ZCbOvCUYxMboVA/s1600/polygon_checkerboard_4.jpg"
+                                title="Polygon checkerboard - Square" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Polygon checkerboard - Square</td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAxYKjrTBo_EQoJccUtI3v748Vp5bsd_UOJ0Or2vN3StuHtbCh8GN1EpPa0sU3V-QVux9GmVKgtJzm0UVc1EMswotksbvTChLZN_GSTa_BtmcUmkVVdNUbeBKr3HsugcGnx16CJ-uzXl4/s1600/polygon_checkerboard.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Polygon checkerboard - Hexagon"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAxYKjrTBo_EQoJccUtI3v748Vp5bsd_UOJ0Or2vN3StuHtbCh8GN1EpPa0sU3V-QVux9GmVKgtJzm0UVc1EMswotksbvTChLZN_GSTa_BtmcUmkVVdNUbeBKr3HsugcGnx16CJ-uzXl4/s1600/polygon_checkerboard.jpg"
+                                title="Polygon checkerboard - Hexagon" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Polygon checkerboard - Hexagon</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/checkerboards/polygon-checkerboards.py"
+            target="_blank">code</a> for the outputs shown above:<br />
+        <br />
+        <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+            src="https://trinket.io/embed/python/cdf3314c83?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+        <br />
+        <br />
+    </div>
+    <h2 id="polygonal-curved" style="text-align: left;">Polygonal curved</h2>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        I now wondered if we could draw curved lines at the sides instead of straight lines. &nbsp;I wanted to see how
+        this looked for different polygons.<br />
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        This is what I had in mind:<br />
+        <br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpPp-qEjabyxKaR__mis3vgeDO1aoKGbIKvwpSOBPtscvcBUTlawxy8XAheW4N14AFA8u8u17yL_iumvTz30BHJ7InC6qcTHpgCaBRz9DpVwsEt3eeDunDZFQdWzn_mwG6ztZF1df0q7c/s1600/expected_polygon_curved_checkerboard.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img
+                                alt="Expected polygon curved checkerboard" border="0" data-original-height="400"
+                                data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpPp-qEjabyxKaR__mis3vgeDO1aoKGbIKvwpSOBPtscvcBUTlawxy8XAheW4N14AFA8u8u17yL_iumvTz30BHJ7InC6qcTHpgCaBRz9DpVwsEt3eeDunDZFQdWzn_mwG6ztZF1df0q7c/s1600/expected_polygon_curved_checkerboard.jpg"
+                                title="Expected polygon curved checkerboard" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Expected polygon curved checkerboard</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        I extended the code for the polygon checkerboards to draw the curved ones. &nbsp;The basic idea is the same, but
+        instead of straight lines, we have to use arcs to draw individual quads. &nbsp;To draw the arcs correctly, I had
+        to remember and use the correct Turtle direction (heading) while connecting the four points.<br />
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here are some outputs of curved checkerboards for different polygons:<br />
+        <br />
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjt-DY-BHW1yQGcm8Plcg2jOCf8z_Otq9Xp-DhIeb7p5fSH5vCCay7iifwkHMs6opKrljweOBBiKtAGj7YNtRzUH41iOxZJOnTttrZR8aKYAuGp1-vKZgO18M_D3tGBhe9xJBKRNLbHxbQ/s1600/polygon_checkerboard_curved_3.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img
+                                alt="Polygon checkerboard curved - Triangle" border="0" data-original-height="400"
+                                data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjt-DY-BHW1yQGcm8Plcg2jOCf8z_Otq9Xp-DhIeb7p5fSH5vCCay7iifwkHMs6opKrljweOBBiKtAGj7YNtRzUH41iOxZJOnTttrZR8aKYAuGp1-vKZgO18M_D3tGBhe9xJBKRNLbHxbQ/s1600/polygon_checkerboard_curved_3.jpg"
+                                title="Polygon checkerboard curved - Triangle" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Polygon checkerboard curved - Triangle</td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw4W1dfwmjLFUi54VBVJTJtips1sAXZIawb4allLa2XcXZ5HpXJIsmZR3vp0DxN3jTqZ8no6mtY_yckU_lF_ja7oXuIfaLUtOtfhbah_ajKzoHef6el6j15NZsEG6orlbj0UVeJ_0dIaY/s1600/polygon_checkerboard_curved_4.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img
+                                alt="Polygon checkerboard curved - Square" border="0" data-original-height="400"
+                                data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw4W1dfwmjLFUi54VBVJTJtips1sAXZIawb4allLa2XcXZ5HpXJIsmZR3vp0DxN3jTqZ8no6mtY_yckU_lF_ja7oXuIfaLUtOtfhbah_ajKzoHef6el6j15NZsEG6orlbj0UVeJ_0dIaY/s1600/polygon_checkerboard_curved_4.jpg"
+                                title="Polygon checkerboard curved - Square" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">
+                        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                            style="margin-left: auto; margin-right: auto; text-align: center;">
+                            <tbody>
+                                <tr>
+                                    <td class="tr-caption" style="font-size: 12.8px;">Polygon checkerboard curved -
+                                        Square</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9FReaOfi0Yp3i14j-P5rPeb_UQi_QgfOjKuXwz9OIZ_SMe9eaWpTrHv9F9Y0PkrDEEmeAiortNHHwSQUop7N-Yom0hiBmDJIluZUqZaLLd4Bbj_lS90bAi2ObfIpM7W9HV9M6xfe4DUw/s1600/polygon_checkerboard_curved.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img
+                                alt="Polygon checkerboard curved - Hexagon" border="0" data-original-height="400"
+                                data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9FReaOfi0Yp3i14j-P5rPeb_UQi_QgfOjKuXwz9OIZ_SMe9eaWpTrHv9F9Y0PkrDEEmeAiortNHHwSQUop7N-Yom0hiBmDJIluZUqZaLLd4Bbj_lS90bAi2ObfIpM7W9HV9M6xfe4DUw/s1600/polygon_checkerboard_curved.jpg"
+                                title="Polygon checkerboard curved - Hexagon" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Polygon checkerboard curved - Hexagon</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here is the <a
+            href="https://github.com/PardhavMaradani/blog/blob/main/checkerboards/polygon-checkerboards-curved.py"
+            target="_blank">code</a> for the outputs &nbsp;shown above:<br />
+        <br />
+        <iframe allowfullscreen="" frameborder="0" height="439" marginheight="0" marginwidth="0"
+            src="https://trinket.io/embed/python/bffc81bbab?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+        <br />
+        <br />
+    </div>
+    <h2 id="other-board-patterns" style="text-align: left;">Other board patterns</h2>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Instead of a full curve (or straight lines) if you connect the points in different ways (red in the picture
+        below) you can get different board patterns. &nbsp;We could potentially draw checkerboards for these too with a
+        bit more work (future).<br />
+        <br />
+        Here are some of these board patterns:
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <br />
+        <div class="separator" style="clear: both; text-align: center;">
+        </div>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhc5YlPBman0RHhn_cn2qMzHPa_Jh5piWcyf5M5jLE6MqzDJFS516_GLGWcsYnIDWDaZYfc0ovhfTCmJlUYIldfFwApO-xTvBPb2q4xCFRVTZuIEYOct6FPlLTHIVSktK8AgL0PDSAFe3I/s1600/potential_patterns.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Potential board patterns"
+                                border="0" data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhc5YlPBman0RHhn_cn2qMzHPa_Jh5piWcyf5M5jLE6MqzDJFS516_GLGWcsYnIDWDaZYfc0ovhfTCmJlUYIldfFwApO-xTvBPb2q4xCFRVTZuIEYOct6FPlLTHIVSktK8AgL0PDSAFe3I/s1600/potential_patterns.jpg"
+                                title="Potential board patterns" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">
+                        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+                            style="margin-left: auto; margin-right: auto; text-align: center;">
+                            <tbody>
+                                <tr>
+                                    <td class="tr-caption" style="font-size: 12.8px;">Potential board patterns</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on"><br /></div>
+    <h2 id="spirals" style="text-align: left;">Spirals</h2>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        The circular checkerboards can be easily extended to connect the four points of the quad in several different
+        ways. &nbsp;Doing so, we can get interesting spirals.<br />
+        <br />
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        Here are some sample spiral checkerboards that we can get by making small changes to the circular checkerboard
+        code:<br />
+        <br />
+        <div class="separator" style="clear: both; text-align: center;">
+        </div>
+        <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+            style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a
+                            href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgECK-jbPmAdjwYmay9puVLOFrIWAHOYYKIia76lh0n2YM_JDEvqvonjh0sT6iLNePAwZS2UQvMS9GmirE_bz3G8JyUCOWxSoa8iwslb_Kla6o8luO5QTduG4e06IRQeN6-IxQuismHFoA/s1600/spiral_checkerboards.jpg"
+                            style="margin-left: auto; margin-right: auto;"><img alt="Spiral checkerboards" border="0"
+                                data-original-height="400" data-original-width="800"
+                                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgECK-jbPmAdjwYmay9puVLOFrIWAHOYYKIia76lh0n2YM_JDEvqvonjh0sT6iLNePAwZS2UQvMS9GmirE_bz3G8JyUCOWxSoa8iwslb_Kla6o8luO5QTduG4e06IRQeN6-IxQuismHFoA/s1600/spiral_checkerboards.jpg"
+                                title="Spiral checkerboards" /></a></td>
+                </tr>
+                <tr>
+                    <td class="tr-caption" style="text-align: center;">Spiral checkerboards</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <h2 id="summary" style="text-align: left;">Summary</h2>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        In summary, checkerboards need not be only rectangular or circular, but any regular polygon - even curved, as
+        shown above.</div>
+    <div dir="ltr" style="text-align: left;" trbidi="on"><br />
+        <div class="separator" style="clear: both; text-align: center;">
+        </div>
+    </div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">All the code in this post is available on <a
+            href="https://github.com/PardhavMaradani/blog/blob/main/checkerboards/" target="_blank">GitHub</a>.</div>
+    <h2 id="updates" style="text-align: left;">Updates:</h2>
+    <div dir="ltr" style="text-align: left;" trbidi="on">5 July 2020</div>
+    <div dir="ltr" style="text-align: left;" trbidi="on">
+        <div dir="ltr" trbidi="on">
+            <ol>
+                <li>An interactive version of Polygon Checkerboards can be found in this later&nbsp;<a
+                        href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}" target="_blank">post</a>.</li>
+            </ol>
+            <div>- Pardhav Maradani</div>
+        </div>
+    </div>
+</div>

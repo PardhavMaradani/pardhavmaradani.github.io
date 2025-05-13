@@ -1,0 +1,200 @@
+---
+layout: post
+title: Interactive Mandalas
+date: '2020-07-25T21:53:00.006+05:30'
+tags:
+- programming
+- python
+- turtle
+modified_time: '2024-07-11T11:33:16.799+05:30'
+thumbnail: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA0irjHlDruNF_trvVVjM7D13IFPcpUPPKP7Fpp93HpXvWHY-54IzvqCHrynb_C80a0j3SXt43sIyZQ1GcfdIhwzMezoXpSZ1KDI7dkmhB-1LX5RYbOLD1TIhBTTUxQ2DWJYnj5O9fVOk/s72-c-d/interactive_mandalas.jpg
+blogger_id: tag:blogger.com,1999:blog-5907231639996853405.post-3905453376258250181
+blogger_orig_url: https://pardhav-m.blogspot.com/2020/07/interactive-mandalas.html
+image:
+  path: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA0irjHlDruNF_trvVVjM7D13IFPcpUPPKP7Fpp93HpXvWHY-54IzvqCHrynb_C80a0j3SXt43sIyZQ1GcfdIhwzMezoXpSZ1KDI7dkmhB-1LX5RYbOLD1TIhBTTUxQ2DWJYnj5O9fVOk/s1200/interactive_mandalas.jpg
+category: Python Turtle Graphics
+---
+
+<!--table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA0irjHlDruNF_trvVVjM7D13IFPcpUPPKP7Fpp93HpXvWHY-54IzvqCHrynb_C80a0j3SXt43sIyZQ1GcfdIhwzMezoXpSZ1KDI7dkmhB-1LX5RYbOLD1TIhBTTUxQ2DWJYnj5O9fVOk/s1200/interactive_mandalas.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Interactive Mandalas" border="0"
+                        data-original-height="600" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjA0irjHlDruNF_trvVVjM7D13IFPcpUPPKP7Fpp93HpXvWHY-54IzvqCHrynb_C80a0j3SXt43sIyZQ1GcfdIhwzMezoXpSZ1KDI7dkmhB-1LX5RYbOLD1TIhBTTUxQ2DWJYnj5O9fVOk/d/interactive_mandalas.jpg"
+                        title="Interactive Mandalas" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;"><br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div-->
+<div>In a previous post on <a href="{{ site.baseurl }}{% post_url 2020-07-19-interactive-voronoi %}"
+        target="_blank">Interactive Voronoi</a>, we duplicated points by rotating them around the center as part of the
+    Voronoi Kaleidoscope. &nbsp;I learnt that this is quite similar to how <a
+        href="https://www.google.com/search?tbm=isch&amp;q=mandalas" target="_blank">Mandalas</a>&nbsp;are
+    drawn&nbsp;and hence wanted to try drawing them using Python Turtle.</div><span><a name='more'></a></span>
+<div><br /></div>
+<h2 id="mandala-creator" style="text-align: left;">Mandala Creator</h2>
+<div>To create Mandalas interactively, we first need the ability to click and drag anywhere on the screen to draw lines.
+    &nbsp;However, there is no drag functionality in the Screen object in Python Turtle. &nbsp;So, to work this around I
+    did the following:</div>
+<div>
+    <ul style="text-align: left;">
+        <li>Created a full screen Turtle using the screen dimensions as a custom shape</li>
+        <li>Hid this turtle, but registered for the click and drag events on it</li>
+    </ul>
+</div>
+<div>With this, we can now get the click and drag coordinates.</div>
+<div><br /></div>
+<div>I created a simple UI to select different properties. &nbsp;I used Sliders from this previous <a
+        href="{{ site.baseurl }}{% post_url 2020-07-05-sliders %}">post</a>&nbsp;to control the following:</div>
+<div>
+    <ul style="text-align: left;">
+        <li>Sectors</li>
+        <ul>
+            <li>The number of sectors to duplicate or mirror the lines drawn</li>
+        </ul>
+        <li>Pensize</li>
+        <ul>
+            <li>The size of the pen to use to draw the lines</li>
+        </ul>
+        <li>Mirror</li>
+        <ul>
+            <li>Whether to mirror the lines drawn within each sector</li>
+        </ul>
+        <li>Show sectors</li>
+        <ul>
+            <li>Whether or not to show the sector guiding lines</li>
+        </ul>
+    </ul>
+</div>
+<div>I created a simple ColorButton class for different colors. &nbsp;I added an 'Undo' button to undo the most recent
+    line drawn and a 'Clear' button to clear the entire drawing.</div>
+<div><br /></div>
+<div>To duplicate lines in different sectors, I calculate the rotated points (around the center) and draw them at the
+    same time with the same Turtle. &nbsp;The rotation angle is '360 / the number of sectors' in degrees. &nbsp;To
+    achieve mirroring within the same sector, I rotate the points (around the same center), but across the line passing
+    through the middle of the sector.</div>
+<div><br /></div>
+<div>I use two different Turtles to draw the image. &nbsp;The first Turtle is the primary one and the second Turtle is
+    the secondary, which is used to draw the most recent path. &nbsp;When the 'Undo' button is clicked, we just clear
+    this secondary Turtle. &nbsp;When we begin to draw a new path, we transfer the content drawn with the secondary
+    Turtle to the primary and redraw just this part. &nbsp;That way, we don't have to redraw the entire image every
+    time. &nbsp;However, this means we can only undo the most recent drawn path, which is ok for now.</div>
+<div><br /></div>
+<div>Here are some images of Mandalas created with this creator:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7MdEcq-w5vWbUqsbTV_ElkCIc8_fIgjeortDdyHdnF1HHzZWgSRVUxKB5W40WrjGuIHBXvccZ2retn-5RdweiYzKGOQ9X0b1KGMMrR95no1IK2PwH9pgohnZ4yWZR4fl2zksa_kriW_0/s1200/mandala_examples.jpg"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Mandala examples" border="0"
+                        data-original-height="800" data-original-width="1200"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7MdEcq-w5vWbUqsbTV_ElkCIc8_fIgjeortDdyHdnF1HHzZWgSRVUxKB5W40WrjGuIHBXvccZ2retn-5RdweiYzKGOQ9X0b1KGMMrR95no1IK2PwH9pgohnZ4yWZR4fl2zksa_kriW_0/d/mandala_examples.jpg"
+                        title="Mandala examples" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Mandala examples<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is a gif of Mandala creation in action:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQIrNHE1Rz96ye1tPmarPYLqWx1JeShK-yTheCV_i8jZjBT6r4_20W3Z8XM0kSeXO__2Co7vknLUS5HQHBhhG8FhHzc_d6vmstZVAUANeOVO3EPt5d_rDq-x6JPc_4x1E-ULa0CF_84KA/s810/mandala_creator_example.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Mandala creation example" border="0"
+                        data-original-height="540" data-original-width="810"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhQIrNHE1Rz96ye1tPmarPYLqWx1JeShK-yTheCV_i8jZjBT6r4_20W3Z8XM0kSeXO__2Co7vknLUS5HQHBhhG8FhHzc_d6vmstZVAUANeOVO3EPt5d_rDq-x6JPc_4x1E-ULa0CF_84KA/d/mandala_creator_example.gif"
+                        title="Mandala creation example" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Mandala creation example<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/interactive-mandalas/mandala-creator.py"
+        target="_blank">code</a> for the Mandala Creator:</div>
+<div><br /></div>
+<div>
+    <div><span style="background-color: yellow;">Note: You can run, edit and make your own changes to all the code
+            samples in this post and try them out (thanks to&nbsp;</span><a href="https://trinket.io/"
+            style="background-color: yellow;" target="_blank">trinket</a><span
+            style="background-color: yellow;">).&nbsp;</span></div>
+    <div><br /></div>
+    <div><span style="background-color: yellow; text-align: center;">Click on ▶ to draw your own Mandala.</span></div>
+</div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/91d2965689?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<h2 id="mandala-player" style="text-align: left;">Mandala Player</h2>
+<div>Even randomly drawn lines look nice with rotational symmetry (and mirroring) as created in the Mandala Creator
+    above. &nbsp;It is not just the output, but the way in which the lines are drawn to achieve it also look very nice.
+    &nbsp;I wanted to capture this as well and see if we can replay how the Mandala was created.</div>
+<div><br /></div>
+<div>To do this, I added the ability to save the paths created to a file and then redraw them in that order with the
+    same color, pensize, number of sectors, mirroring, etc.</div>
+<div><br /></div>
+<div>There is a variable called 'g_show_save' in the Mandala Creator above, which when enabled will show the 'Save'
+    button. &nbsp;When you click 'Save', all the paths along with the Turtle state (color, pensize, etc) are written as
+    a single line to a file called 'data.txt'. &nbsp;You will see this as a new tab in the code block above. &nbsp;You
+    can copy that content to the 'data.txt' file in the Mandala Player code block below. &nbsp;By default, I added a few
+    that I created.</div>
+<div><br /></div>
+<div>I used JSON as the format to write the data out in the Mandala Creator above. &nbsp;I ran into some bugs with the
+    json module in Trinket and had to workaround those. &nbsp;I didn't normalize the points while writing them out, but
+    am doing so within the player as you can see at the beginning of the 'play' function in the code below.</div>
+<div><br /></div>
+<div>Here is a gif of the Mandala player in action:</div>
+<div><br /></div>
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container"
+    style="margin-left: auto; margin-right: auto;">
+    <tbody>
+        <tr>
+            <td style="text-align: center;"><a
+                    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8nq5ycajskUdNhAVQCLN3qtS5wKFh9STV7szMifbckpCZV3KWZtIX96jFsvCWrJA8zx8UObtqa-WaCXeOHz3eP-2TSMTGqx-6P19wdK4tuu6G_D5vWFzK4OpjI3AKlPEbDZ9JKYthSso/s810/mandala_player_example.gif"
+                    style="margin-left: auto; margin-right: auto;"><img alt="Mandala Player example" border="0"
+                        data-original-height="540" data-original-width="810"
+                        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8nq5ycajskUdNhAVQCLN3qtS5wKFh9STV7szMifbckpCZV3KWZtIX96jFsvCWrJA8zx8UObtqa-WaCXeOHz3eP-2TSMTGqx-6P19wdK4tuu6G_D5vWFzK4OpjI3AKlPEbDZ9JKYthSso/d/mandala_player_example.gif"
+                        title="Mandala Player example" /></a></td>
+        </tr>
+        <tr>
+            <td class="tr-caption" style="text-align: center;">Mandala Player example<br /></td>
+        </tr>
+    </tbody>
+</table>
+<div><br /></div>
+<div><br /></div>
+<div>Here is the <a href="https://github.com/PardhavMaradani/blog/blob/main/interactive-mandalas/mandala-player.py"
+        target="_blank">code</a> for the Mandala Player:</div>
+<div><br /></div>
+<div><span style="background-color: yellow; text-align: center;">Click on ▶ to show various Mandalas being drawn.</span>
+</div>
+<div><span style="background-color: yellow; text-align: center;">Note: You can update 'data.txt' with what you created
+        in Mandala Creator above to reproduce your own drawings too.</span></div>
+<div><br /></div>
+<iframe allowfullscreen="" frameborder="0" height="574" marginheight="0" marginwidth="0"
+    src="https://trinket.io/embed/python/62211b93ee?toggleCode=true&amp;runOption=run" width="100%"></iframe>
+
+<div><br /></div>
+<h2 id="summary" style="text-align: left;">Summary</h2>
+<div>In summary, Mandalas are pretty simple to draw and look beautiful even with simple strokes. &nbsp;It is also nice
+    to visualize them while they are being drawn.</div>
+<div><br /></div>
+<div>All the code in this post is available on <a
+        href="https://github.com/PardhavMaradani/blog/blob/main/interactive-mandalas/" target="_blank">GitHub</a>.</div>
+<div><br /></div>
+<div>- Pardhav Maradani</div>
