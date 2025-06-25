@@ -14,6 +14,10 @@
   icon: "fab fa-blogger"
   url: "https://pardhav-m.blogspot.com"
 
+- type: youtube
+  icon: "fab fa-youtube"
+  url: "https://www.youtube.com/@PardhavMaradani"
+
 - type: rss
   icon: "fas fa-rss"
   noblank: true
