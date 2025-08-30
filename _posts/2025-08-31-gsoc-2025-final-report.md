@@ -31,11 +31,11 @@ Annotations support is newly added to Molecular Nodes as part of this project. A
 
 ### Revamped Density Entity
 
-Molecular Nodes had support for density grids in the MRC2014 format prior to this project (with `mrcfile`). This project revamed this support to use MDAnalysis [GridDataFormats](https://github.com/MDAnalysis/GridDataFormats) to support a wider variety of density grids. A new `Density ISO Surface Style` Geometry Node was added (programatically) to support both positive and negative ISO values, contours and slicing along the three major axes. This now allows visualizing MDAnalysis `DensityAnalysis` results written to `.dx` files like the [Calculating the solvent density around a protein](https://userguide.mdanalysis.org/stable/examples/analysis/volumetric/density_analysis.html) example.
+Molecular Nodes had support for density grids in the MRC2014 format prior to this project (with `mrcfile`). This project revamped this support to use MDAnalysis [GridDataFormats](https://github.com/MDAnalysis/GridDataFormats) to support a wider variety of density grids. A new `Density ISO Surface Style` Geometry Node was added (programatically) to support both positive and negative ISO values, contours and slicing along the three major axes. This now allows visualizing MDAnalysis `DensityAnalysis` results written to `.dx` files like the [Calculating the solvent density around a protein](https://userguide.mdanalysis.org/stable/examples/analysis/volumetric/density_analysis.html) example.
 
 ### Viewport GUI
 
-A new GUI was added to the 3D Viewport region of Blender as part of this project. This GUI is accessible from the side panel (or the `n-panel`) of the 3D Viewport and displays all the Molecular Node entities, entity specific configurations like trajectory details, sytles and annotations. The panels in this GUI allow for easy customization (with instant visualizations) of all the values that are configurable through the API as well. All the elements of this GUI are animatable as well in Blender.
+A new GUI was added to the 3D Viewport region of Blender as part of this project. This GUI is accessible from the side panel (or the `n-panel`) of the 3D Viewport and displays all the Molecular Node entities, entity specific configurations like trajectory details, styles and annotations. The panels in this GUI allow for easy customization (with instant visualizations) of all the values that are configurable through the API as well. All the elements of this GUI are animatable as well in Blender.
 
 ### Canvas features - Rendering / Animation
 
