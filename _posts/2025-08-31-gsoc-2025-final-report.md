@@ -15,7 +15,7 @@ My contributions were to [Molecular Nodes](https://github.com/BradyAJohnston/Mol
 
 ## Code
 
-All the code for this project can be found in the `gsoc-2025` branch of the Molecular Nodes repo as [PR #875](https://github.com/BradyAJohnston/MolecularNodes/pull/875) that merges these onto `main`. The appendix lists individual PRs, design discussions and weekly progress reports that were part of this project.
+All the code for this project can be found in the `gsoc-2025` branch of the Molecular Nodes repo as [PR #875](https://github.com/BradyAJohnston/MolecularNodes/pull/875) that merges these onto `main`. The appendix lists individual PRs, design discussions and weekly progress reports that were part of this project. Overall, this project contributed 7.5k+ lines of new code, tests and documentation to the [Molecular Nodes](https://github.com/BradyAJohnston/MolecularNodes) repo through 25+ PRs.
 
 ## Contributions
 
@@ -25,21 +25,35 @@ Here is a summary of my contributions:
 
 Molecular Nodes already had support for multiple styles for the `Molecule` entity prior to this project. This project extended this support to the `Trajectory` entity as well. With this, a single MDAnalysis universe loaded into Blender can have multiple styles / representations based either on MDAnalysis selection phrases or `AtomGroup`s. All style specific configurations can be made through the API as well as the new Viewport GUI.
 
+![Trajectory Multiple Styles](assets/img/gsoc-2025-final-report-trajectory-multiple-styles.png)
+_Trajectory Multiple Styles_
+
+
 ### Annotations
 
 Annotations support is newly added to Molecular Nodes as part of this project. Annotations allow drawing text, arrows, lines and other shapes as overlays over the 3D models to show info or analysis results that are dynamic, can be interactively viewed and rendered. The annotations support is built to be easily extensible by end users to write their own annotation types based on their analysis needs by only using high level utilities. A common API interface along with automatic GUI support is provided by the implementation. A few annotations for displaying atom info, center-of-masses, distance between center-of-masses, canonical dihedral angles and universe info are bundled for Trajectories, grid axes and grid info for Density grids. A few others to add generic 2d and 3d labels in scenes are provided for all entities.
+
+![Annotations](assets/img/gsoc-2025-final-report-annotations.png)
+_Annotations_
 
 ### Revamped Density Entity
 
 Molecular Nodes had support for density grids in the MRC2014 format prior to this project (with `mrcfile`). This project revamped this support to use MDAnalysis [GridDataFormats](https://github.com/MDAnalysis/GridDataFormats) to support a wider variety of density grids. A new `Density ISO Surface Style` Geometry Node was added (programatically) to support both positive and negative ISO values, contours and slicing along the three major axes. This now allows visualizing MDAnalysis `DensityAnalysis` results written to `.dx` files like the [Calculating the solvent density around a protein](https://userguide.mdanalysis.org/stable/examples/analysis/volumetric/density_analysis.html) example.
 
+![Density Entity](assets/img/gsoc-2025-final-report-density-entity.png)
+_Density Entity_
+
 ### Viewport GUI
 
 A new GUI was added to the 3D Viewport region of Blender as part of this project. This GUI is accessible from the side panel (or the `n-panel`) of the 3D Viewport and displays all the Molecular Node entities, entity specific configurations like trajectory details, styles and annotations. The panels in this GUI allow for easy customization (with instant visualizations) of all the values that are configurable through the API as well. All the elements of this GUI are animatable as well in Blender.
 
+{% include embed/video.html src='assets/video/gsoc-2025-final-report-viewport-gui.mp4' title='Viewport GUI' %}
+
 ### Canvas features - Rendering / Animation
 
 The `Canvas` support in Molecular Nodes was at its early stages prior to this project. Animation support was added by rendering individual frames and putting them together using Blender's Video Sequence Editor APIs. An automatic compositor setup was added to allow rendered annotation images to be composited over the final renders. A generic framework was added that allows temporarily overriding Blender render settings for generating images and movies and restoring them back. A new `Camera` class and a `frame_view` method allows for framing any region of interest from different view points for renders.
+
+{% include embed/video.html src='assets/video/gsoc-2025-final-report-canvas-animation.mp4' title='Canvas Animation' %}
 
 ## Acknowledgements
 
